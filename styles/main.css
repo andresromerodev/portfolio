@@ -25,6 +25,7 @@ body {
   font-variant: common-ligatures contextual;
   letter-spacing: -0.02em;
 }
+
 b,
 strong,
 h3,
@@ -33,9 +34,11 @@ h5,
 h6 {
   font-variation-settings: 'wght' 650;
 }
+
 h1 {
   font-variation-settings: 'wght' 850;
 }
+
 h2 {
   font-variation-settings: 'wght' 750;
 }
