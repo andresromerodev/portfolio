@@ -12,7 +12,7 @@ import Image from 'next/image'
 
 I'm excited to be diving into the world of blogging with my first post, and I've decided to share my thoughts on my website, or rather my second website and why I decided to move away from the old one. I hope you'll find my perspective informative and engaging.
 
-## What Led Me to Abandon My First Full-Stack Website
+## What Led Me to Abandon My First Website
 
 Since starting my career in tech, I've been fascinated by system design - specifically, what goes into creating scalable, maintainable, and efficient applications. I'm particularly interested in building apps that adhere to the [12-factor app](https://12factor.net) principles, as I believe they offer a solid framework for developing high-quality software.
 
