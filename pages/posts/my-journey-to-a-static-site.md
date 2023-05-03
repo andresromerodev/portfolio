@@ -2,7 +2,7 @@
 title: From Full-Stack Overload to Streamlined Simplicity - My Journey to a Static Site
 date: 2024/5/03
 description: Why I Abandoned My Full-Stack Website and Opted for a Backend-Free Solution.
-tag: javascript
+tag: JavaScript
 author: You
 ---
 
@@ -14,7 +14,7 @@ I'm excited to be diving into the world of blogging with my first post, and I've
 
 ## What Led Me to Abandon My First Full-Stack Website
 
-Since starting my career in tech, I've been fascinated by system design - specifically, what goes into creating scalable, maintainable, and efficient applications. I'm particularly interested in building apps that adhere to the 12-factor app principles, as I believe they offer a solid framework for developing high-quality software.
+Since starting my career in tech, I've been fascinated by system design - specifically, what goes into creating scalable, maintainable, and efficient applications. I'm particularly interested in building apps that adhere to the [12-factor app](https://12factor.net) principles, as I believe they offer a solid framework for developing high-quality software.
 
 In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching (Redis), data scraping, and API integrations. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
 
@@ -58,27 +58,28 @@ sendEmail = async (req: Request, res: Response) => {
 ```jsx
 // Retrieving GitHub repository information using the Repository service
 searchPublicRepos = async (req: Request, res: Response) => {
-        try {
-            const { text, page, pageSize } = req.query;
-            const searchReq: IRepositorySearchRequest = {
-                text: String(text),
-                page: Number(page) || 1,
-                pageSize: Number(pageSize) || 10,
-                visibility: Visibility.Public,
-            };
-            const count: Number = await this.service.getPublicRepositoriesCount();
-            const totalPages: Number = Math.ceil(Number(count) / Number(pageSize));
-            const repositories: Repository[] = await this.service.searchPublicRepositories(searchReq);
-            const paginationResponse: any = { repositories, page: Number(page), pages: totalPages };
-            return res
-                .status(HttpStatus.OK)
-                .json(paginationResponse)
-                .locals.cache(paginationResponse);
-        } catch (error) {
-            return res.status(error.code || HttpStatus.INTERNAL_SERVER_ERROR).json({
-                error: error.message,
-            });
-        }
+    try {
+        const { text, page, pageSize } = req.query;
+        const searchReq: IRepositorySearchRequest = {
+            text: String(text),
+            page: Number(page) || 1,
+            pageSize: Number(pageSize) || 10,
+            visibility: Visibility.Public,
+        };
+
+        const count: Number = await this.service.getPublicRepositoriesCount();
+        const totalPages: Number = Math.ceil(Number(count) / Number(pageSize));
+        const repositories: Repository[] = await this.service.searchPublicRepositories(searchReq);
+        const paginationResponse: any = { repositories, page: Number(page), pages: totalPages };
+
+        return res
+            .status(HttpStatus.OK)
+            .json(paginationResponse)
+            .locals.cache(paginationResponse);
+    } catch (error) {
+        return res.status(error.code || HttpStatus.INTERNAL_SERVER_ERROR).json({
+            error: error.message,
+        });
     }
 }
 ```
@@ -102,7 +103,7 @@ getAllNonExpiredBadges = async (req: Request, res: Response) => {
   }
 ```
 
-And of course if you are curious on how you can scrap your Credly badges here’s how you can do so with Cheerio:
+And if you are curious on how you can scrap your Credly badges here’s how you can do so with Cheerio:
 
 ```jsx
 class BadgeService {
@@ -202,9 +203,9 @@ Initially, I deployed the website using Docker on a Raspberry Pi 4 in my home. H
 
 Despite all of the great features and effort put into the project, I ultimately decided to discontinue it. Maintaining the website was too much overhead, and adding new features - such as a blog (which I never got around to) - would require spinning up a new service, connecting it to the frontend, and building custom components to display the data. With my limited time and resources, I realized it was time to say goodbye to this project that had started as a fun experiment.
 
-By the way, you can still visit my old website on [https://web-portfolio-frontend.onrender.com](https://web-portfolio-frontend.onrender.com/) the code for the project can be found on Github: ‣ / ‣. 
+By the way, you can still visit [my old website](https://web-portfolio-frontend.onrender.com/) the code for the project can be found on Github: [Backend](https://github.com/andresromeroh/legacy-web-portfolio-node) / [Frontend](https://github.com/andresromeroh/legacy-web-portfolio-react)‣. 
 
-## My New Static Website
+## My New Static Site
 
 After some consideration, I realized that what I really wanted was a simple website that would allow me to focus on content creation, rather than spending countless hours on engineering a web application to showcase my skills. After all, I had already shipped several different projects and demonstrated my abilities. At this point, I simply wanted to share my experiences, and for that, a static site was the perfect solution.
 
@@ -213,3 +214,5 @@ I knew that NextJS would be my best bet, given its capabilities as a full-stack 
 You can explore the code for my website on https://github.com/andresromeroh/portfolio, and I encourage you to check it out and give it a spin.
 
 Overall, the entire process of building this website was a true learning experience from start to finish, and I have no regrets about the time and effort I put into it. I hope you've enjoyed reading about my journey, and I look forward to sharing more with you in the future. Thanks for reading!
+
+Andrés.
