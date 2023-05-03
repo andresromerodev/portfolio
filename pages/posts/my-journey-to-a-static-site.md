@@ -213,6 +213,6 @@ I knew that NextJS would be my best bet, given its capabilities as a full-stack 
 
 You can explore the code for my website on https://github.com/andresromeroh/portfolio, and I encourage you to check it out and give it a spin.
 
-Overall, the entire process of building this website was a true learning experience from start to finish, and I have no regrets about the time and effort I put into it. I hope you've enjoyed reading about my journey, and I look forward to sharing more with you in the future. Thanks for reading!
+Overall, the entire process of building this website and the old one was a true learning experience from start to finish, and I have no regrets about the time and effort I put into it. I hope you've enjoyed reading about my journey, and I look forward to sharing more with you in the future. Thanks for reading!
 
 Andrés.
