@@ -1,6 +1,6 @@
 ---
 title: From Full-Stack Overload to Streamlined Simplicity - My Journey to a Static Site
-date: 2024/5/03
+date: 2023/5/03
 description: Why I Abandoned My Full-Stack Website and Opted for a Backend-Free Solution.
 tag: JavaScript
 author: You
