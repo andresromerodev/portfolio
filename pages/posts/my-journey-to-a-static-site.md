@@ -35,7 +35,7 @@ Each service in the backend had a distinct purpose:
 
 - Email Service: responsible for handling emails generated from the contact form on the website, and it interacted directly with SendGrid via their SDK.
 
-```jsx
+```js
 // Sending emails through the Email service
 sendEmail = async (req: Request, res: Response) => {
     try {
@@ -55,7 +55,7 @@ sendEmail = async (req: Request, res: Response) => {
 
 - Repository Service: provide a paginated and sortable list of all my GitHub projects, which could be displayed on the website.
 
-```jsx
+```js
 // Retrieving GitHub repository information using the Repository service
 searchPublicRepos = async (req: Request, res: Response) => {
     try {
@@ -86,7 +86,7 @@ searchPublicRepos = async (req: Request, res: Response) => {
 
 - Badge Service: this one was particularly interesting. I had earned several Credly badges over time, including those for my AWS certifications, and I wanted to display them on my website in real-time. Unfortunately, Credly did not offer an API for this, so I opted to scrape their website instead. Thankfully, their site was static, and their naming conventions for UI identifiers were consistent, which allowed me to scrape my own Credly data.
 
-```jsx
+```js
 // Querying the badge service for all currently valid Credly badges
 getAllNonExpiredBadges = async (req: Request, res: Response) => {
       try {
@@ -105,7 +105,7 @@ getAllNonExpiredBadges = async (req: Request, res: Response) => {
 
 And if you are curious on how you can scrap your Credly badges here’s how you can do so with Cheerio:
 
-```jsx
+```js
 class BadgeService {
     protected _$: any = null;
     protected configService: ConfigService = new ConfigService();
@@ -154,7 +154,7 @@ class BadgeService {
 
 - Cache Service: Of course, repeatedly scraping data can be resource-intensive, which is where the caching service came into play. I deployed a Redis database and implemented an Express middleware to cache the data, primarily for Credly badges but also for certain endpoints in the Repository service.
 
-```jsx
+```js
 // Service
 class CacheService {
     private static _instance: CacheService;
