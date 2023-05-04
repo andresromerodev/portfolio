@@ -16,9 +16,9 @@ I'm excited to be diving into the world of blogging with my first post, and I've
 
 Since starting my career in tech, I've been fascinated by system design - specifically, what goes into creating scalable, maintainable, and efficient applications. I'm particularly interested in building apps that adhere to the [12-factor app](https://12factor.net) principles, as I believe they offer a solid framework for developing high-quality software.
 
-In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching (Redis), data scraping, and API integrations. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
+In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching, data scraping, and API integrations. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
 
-So I started and I opted to split the backend and frontend into separate applications with various services, resulting in a system diagram that looks something like this:
+So I started and opted to split the backend and frontend into separate applications with various services, resulting in a system diagram that looks something like this:
 
 <Image
   src="/images/oldsitediagram.jpg"
@@ -84,7 +84,7 @@ searchPublicRepos = async (req: Request, res: Response) => {
 }
 ```
 
-- Badge Service: this one was particularly interesting. I had earned several Credly badges over time, including those for my AWS certifications, and I wanted to display them on my website in real-time. Unfortunately, Credly did not offer an API for this, so I opted to scrape their website instead. Thankfully, their site was static, and their naming conventions for UI identifiers were consistent, which allowed me to scrape my own Credly data using cheerio
+- Badge Service: this one was particularly interesting. I had earned several Credly badges over time, including those for my AWS certifications, and I wanted to display them on my website in real-time. Unfortunately, Credly did not offer an API for this, so I opted to scrape their website instead. Thankfully, their site was static, and their naming conventions for UI identifiers were consistent, which allowed me to scrape my own Credly data.
 
 ```jsx
 // Querying the badge service for all currently valid Credly badges
@@ -152,7 +152,7 @@ class BadgeService {
 }
 ```
 
-- Cache Service: Of course, repeatedly scraping data can be resource-intensive, which is where the caching service came into play. I deployed a Redis database and used Express middleware to cache the data, primarily for Credly badges but also for certain endpoints related to GitHub repositories.
+- Cache Service: Of course, repeatedly scraping data can be resource-intensive, which is where the caching service came into play. I deployed a Redis database and implemented an Express middleware to cache the data, primarily for Credly badges but also for certain endpoints in the Repository service.
 
 ```jsx
 // Service
@@ -199,11 +199,11 @@ const cacheMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
 I won't go into too much detail about the frontend, as it was a relatively simple React app with some customized Bootstrap components. It utilized data fetching to display information from the backend, and one of the more interesting features was a custom table with built-in pagination that I created to list my GitHub projects.
 
-Initially, I deployed the website using Docker on a Raspberry Pi 4 in my home. However, I eventually moved to Heroku until they discontinued their own services, which prompted me to switch everything over to Render (which was a bit of a hassle).
+Initially, I deployed the website using Docker on a Raspberry Pi 4 in my home. However, I eventually moved to Heroku until they discontinued their free tier services, which prompted me to switch everything over to Render (which was a bit of a hassle).
 
 Despite all of the great features and effort put into the project, I ultimately decided to discontinue it. Maintaining the website was too much overhead, and adding new features - such as a blog (which I never got around to) - would require spinning up a new service, connecting it to the frontend, and building custom components to display the data. With my limited time and resources, I realized it was time to say goodbye to this project that had started as a fun experiment.
 
-By the way, you can still visit [my old website](https://web-portfolio-frontend.onrender.com/) the code for the project can be found on Github: [Backend](https://github.com/andresromeroh/legacy-web-portfolio-node) / [Frontend](https://github.com/andresromeroh/legacy-web-portfolio-react)‣. 
+By the way, you can still visit [my old website](https://web-portfolio-frontend.onrender.com/) the code for the project can be found on Github: [Backend](https://github.com/andresromeroh/legacy-web-portfolio-node) / [Frontend](https://github.com/andresromeroh/legacy-web-portfolio-react). 
 
 ## My New Static Site
 
