@@ -1,5 +1,5 @@
 ---
-title: From Full-Stack Overload to Streamlined Simplicity: My Journey to a Static Site
+title: From Full-Stack Overload to Streamlined Simplicity - My Journey to a Static Site
 date: 2023/5/03
 description: Why I Abandoned My Full-Stack Website and Opted for a Backend-Free Solution.
 tag: JavaScript
@@ -8,7 +8,7 @@ author: You
 
 import Image from 'next/image'
 
-# From Full-Stack Overload to Streamlined Simplicity: My Journey to a Static Site
+# From Full-Stack Overload to Streamlined Simplicity - My Journey to a Static Site
 
 I'm excited to be diving into the world of blogging with my first post, and I've decided to share my thoughts on my website, or rather my second website and why I decided to move away from the old one. I hope you'll find my perspective informative and engaging.
 
