@@ -18,7 +18,7 @@ Since starting my career in tech, I've been fascinated by system design - specif
 
 In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching, data scraping, and API integrations. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
 
-I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. This approach led to the development of a system diagram, which is depicted as follows:
+I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a small-system diagram that looks something like this :
 
 <Image
   src="/images/oldsitediagram.jpg"
