@@ -18,7 +18,7 @@ Since starting my career in tech, I've been fascinated by system design - specif
 
 In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching, data scraping, and API integrations. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
 
-So I started and opted to split the backend and frontend into separate applications with various services, resulting in a system diagram that looks something like this:
+I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. This approach led to the development of a system diagram, which is depicted as follows:
 
 <Image
   src="/images/oldsitediagram.jpg"
@@ -211,6 +211,6 @@ After some consideration, I realized that what I really wanted was a simple webs
 
 I knew that NextJS would be my best bet, given its capabilities as a full-stack meta framework and its powerful static site generation features. Luckily, I found a template that I could build upon, so I started by clearing out the existing content, deploying it to the Vercel cloud (which was incredibly easy), redirecting my domain names, and adding a few of my own pages. Best of all, it came with a built-in blog, which is how you're reading my first post right now! Whenever I have something new to share, I can simply write it up, submit it to the repository, and it becomes available immediately. How cool is that?
 
-You can explore the code for my website on https://github.com/andresromeroh/portfolio, and I encourage you to check it out and give it a spin.
+You can explore the code for my new website on https://github.com/andresromeroh/portfolio.
 
 Overall, the entire process of building this website and the old one was a true learning experience from start to finish, and I have no regrets about the time and effort I put into it. I hope you've enjoyed reading about my journey, and I look forward to sharing more with you in the future. Thanks for reading!
