@@ -21,7 +21,7 @@ In late 2019, I already had some coding experience under my belt from my time at
 I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a small-system diagram that looks something like this :
 
 <Image
-  src="/images/oldsitediagram.jpg"
+  src="/images/oldsitearchitecture.jpg"
   alt="Photo"
   width={800}
   height={500}
