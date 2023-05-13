@@ -1,14 +1,14 @@
 ---
-title: Unleashing the Power of Python Extracting Amazon Product Data
+title: Extracting Amazon Product Data with Python
 date: 2023/5/13
-description: Learn how to effectively extract Amazon product data with Python.
-tag: Python,Amazon,Data Scrapping,Selenium
+description: Learn how to effectively extract Amazon product data.
+tag: Python
 author: You
 ---
 
 import Image from 'next/image'
 
-# Unleashing the Power of Python Extracting Amazon Product Data
+# Extracting Amazon Product Data with Python
 
 Not too long ago, I had the intriguing opportunity to engage in a project that necessitated the extraction of product data from Amazon.com. This endeavor was particularly captivating for me, as it marked my initial foray into data scraping. Today, I want to share with you some key insights and clever techniques I picked up while navigating the labyrinth of this e-commerce behemoth.
 
