@@ -2,7 +2,7 @@
 title: From Full-Stack Overload to Streamlined Simplicity - My Journey to a Static Site
 date: 2023/5/03
 description: Why I Abandoned My Full-Stack Website and Opted for a Backend-Free Solution.
-tag: JavaScript
+tag: JavaScript,NodeJS,React,Architecture
 author: You
 ---
 
@@ -23,7 +23,7 @@ I began the project by implementing a strategy to decouple the backend and front
 <Image
   src="/images/oldsitearchitecture.jpg"
   alt="Photo"
-  width={800}
+  width={850}
   height={500}
   priority
   className="next-image"
