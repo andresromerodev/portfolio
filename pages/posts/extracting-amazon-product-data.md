@@ -136,7 +136,7 @@ soup = BeautifulSoup(html, 'html.parser')
 
 Below are some useful code snippets that you can employ to extract the primary product information from Amazon:
 
-### *Product Title*
+### Product Title
 
 ```python
 try:
@@ -145,7 +145,7 @@ except:
     sys.exit() # When there is no name product is no longer available
 ```
 
-### *Out of Stock*
+### Out of Stock
 
 ```python
 try:
@@ -155,7 +155,7 @@ except:
     stock = 'Unavailable'
 ```
 
-### *Q&A Count*
+### Q&A Count
 
 ```python
 qa_html = soup.select('#askATFLink')
@@ -166,7 +166,7 @@ except:
     qa_count = 0
 ```
 
-### *Star Count*
+### Star Count
 
 ```python
 stars_html = soup.select('i[class*="a-icon a-icon-star a-star-"] span')
@@ -187,7 +187,7 @@ except:
     review_count = 0
 ```
 
-### *Best Sellers Rank*
+### Best Sellers Rank
 
 ```python
 # Use a regex to locate ranks and categories
@@ -204,7 +204,7 @@ else: # If the rank is within a table view
         rank = re.findall(CATEGORIES_REGEX, str(categories_html))
 ```
 
-### *Product Categories*
+### Product Categories
 
 ```python
 try:
@@ -223,7 +223,7 @@ try:
 	  print('Exception occurred while scrapping categories')
 ```
 
-### *Product Coupons*
+### Product Coupons
 
 ```python
 try:
@@ -235,7 +235,7 @@ try:
 	  print('Exception occurred while scrapping coupon')
 ```
 
-### *Shipping Location*
+### Shipping Location
 
 ```python
 try:
@@ -249,7 +249,7 @@ except:
     print('Exception occurred while scrapping ships_from')
 ```
 
-### *Sold By*
+### Sold By
 
 ```python
 try:
