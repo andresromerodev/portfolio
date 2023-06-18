@@ -10,7 +10,7 @@ import Image from 'next/image'
 
 # Extracting Amazon Product Data with Python
 
-Not too long ago, I had the intriguing opportunity to engage in a project that necessitated the extraction of product data from Amazon.com. This endeavor was particularly captivating for me, as it marked my initial foray into data scraping. Today, I want to share with you some key insights and clever techniques I picked up while navigating the labyrinth of this e-commerce behemoth.
+Not too long ago, I had the chance to work on a project where I extracted product data from Amazon.com. It was an interesting experience for me as it was my first time working with data scraping. Today, I would like to share some valuable insights and techniques I learned while navigating through this large e-commerce platform.
 
 <Image
   src="/images/amazonproductpage.jpg"
@@ -21,11 +21,11 @@ Not too long ago, I had the intriguing opportunity to engage in a project that n
   className="next-image"
 />
 
-## ****The Tech Arsenal****
+## ****The Tech Stack****
 
-- Python: An ideal companion when it comes to data handling.
-- Selenium: A powerful tool for interaction with dynamic web pages.
-- BeautifulSoup: The perfect solution for dealing with and manipulating plain HTML tags.
+- **Python**: A versatile programming language for data handling.
+- **Selenium**: A useful automation tool for interacting with dynamic web pages.
+- **BeautifulSoup**: An effective solution for working with and manipulating HTML tags.
 
 # Things to Keep in Mind
 
@@ -59,7 +59,7 @@ Ensuring the accuracy of your scraped data will require multiple checks. You mig
   className="next-image"
 />
 
-## The Efficiency of Your Scraping Bot may not Be Up to Par
+## The Efficiency of Your Scraping Bot may Need Improvement
 
 Certain vital information, such as whether an item is in stock, can only be determined once the page has completely loaded and all the underlying JavaScript code has been executed. Consequently, you may need to allow up to a full second for the page to load properly.
 
@@ -142,7 +142,7 @@ Below are some useful code snippets that you can employ to extract the primary p
 try:
     name = soup.find(id='productTitle').get_text().strip()
 except:
-    # When there is no name product is no longer available
+    sys.exit() # When there is no name product is no longer available
 ```
 
 ### *Out of Stock*
@@ -190,7 +190,7 @@ except:
 ### *Best Sellers Rank*
 
 ```python
-# Harnessing the power of Regex to locate ranks and categories
+# Use a regex to locate ranks and categories
 CATEGORIES_REGEX = '#\\d+ in |#\\d+\\,*\\d+ in'
 
 rank = []
@@ -198,7 +198,7 @@ rank_html = soup.find_all('div', { 'id': 'detailBulletsWrapper_feature_div' })
 
 if rank_html and 'Best Sellers Rank' in str(rank_html):
     rank = re.findall(CATEGORIES_REGEX, str(rank_html))
-else: # Amazon table view
+else: # If the rank is within a table view
     rank_html = soup.find_all('table', { 'id': 'productDetails_detailBullets_sections1' })
     if rank_html and 'Best Sellers Rank' in str(rank_html):
         rank = re.findall(CATEGORIES_REGEX, str(categories_html))
@@ -211,7 +211,7 @@ try:
     categories_html = soup.find_all('div', {'id': 'detailBulletsWrapper_feature_div'})
     if categories_html and 'Best Sellers Rank' in str(categories_html):
         categories = re.findall(CATEGORIES_REGEX, str(categories_html))
-    else: # Amazon table view
+    else: # If the categories are within a table view
         categories_html = soup.find_all('table', {'id': 'productDetails_detailBullets_sections1'})
 
         if categories_html and 'Best Sellers Rank' in str(categories_html):
