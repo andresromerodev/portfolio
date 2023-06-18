@@ -16,7 +16,7 @@ I'm excited to be diving into the world of blogging with my first post, and I've
 
 Since starting my career in tech, I've been fascinated by system design - specifically, what goes into creating scalable, maintainable, and efficient applications. I'm particularly interested in building apps that adhere to the [12-factor app](https://12factor.net) principles, as I believe they offer a solid framework for developing high-quality software.
 
-In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching, data scraping, and API integrations. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
+In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching, API integrations and more. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
 
 I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a small-system diagram that looks something like this :
 
@@ -29,14 +29,14 @@ I began the project by implementing a strategy to decouple the backend and front
   className="next-image"
 />
 
-I built the backend using NodeJS and Typescript, and one thing I'm particularly proud of is the modular organization I created with Express. Express is a highly versatile and un-opinionated framework for building APIs, and my modular approach allowed for greater flexibility and maintainability. However, if I were to build something similar today, I might consider using NestJS instead, which provides similar functionality out of the box and could save me some time.
+I built the backend using NodeJS and Typescript, and one thing I'm particularly proud of is the modular organization I created with ExpressJS. Express is a highly versatile and un-opinionated framework for building APIs, and my modular approach allowed for greater flexibility and maintainability. However, if I were to build something similar today, I might consider using NestJS instead, which provides similar functionality out of the box and could save me some time.
 
 Each service in the backend had a distinct purpose:
 
-- Email Service: responsible for handling emails generated from the contact form on the website, and it interacted directly with SendGrid via their SDK.
+- **Email Service**: responsible for handling emails generated from the contact form on the website, and it interacted directly with SendGrid via their SDK, if you don't know SendGrid is a cloud-based email delivery service that simplifies and streamlines the process of sending and managing emails.
 
+***Sending emails through the Email service 👇***
 ```js
-// Sending emails through the Email service
 sendEmail = async (req: Request, res: Response) => {
     try {
         const email: Email = this.service.createEmailContent(req.body);
@@ -53,10 +53,10 @@ sendEmail = async (req: Request, res: Response) => {
 }
 ```
 
-- Repository Service: provide a paginated and sortable list of all my GitHub projects, which could be displayed on the website.
+- **Repository Service**: provide a paginated and sortable list of all my GitHub projects, which could be displayed on the website.
 
+***Retrieving GitHub repository information using the Repository service 👇***
 ```js
-// Retrieving GitHub repository information using the Repository service
 searchPublicRepos = async (req: Request, res: Response) => {
     try {
         const { text, page, pageSize } = req.query;
@@ -84,10 +84,10 @@ searchPublicRepos = async (req: Request, res: Response) => {
 }
 ```
 
-- Badge Service: this one was particularly interesting. I had earned several Credly badges over time, including those for my AWS certifications, and I wanted to display them on my website in real-time. Unfortunately, Credly did not offer an API for this, so I opted to scrape their website instead. Thankfully, their site was static, and their naming conventions for UI identifiers were consistent, which allowed me to scrape my own Credly data.
+- **Badge Service**: this one was particularly interesting. I had a couple of Credly badges over time, including those for my AWS certifications, and I wanted to display them on my website in real-time. Unfortunately, Credly did not offer an API for this, so I opted to scrape their website instead. Thankfully, their site was static, and their naming conventions for UI identifiers were consistent, which allowed me to scrape my own Credly data.
 
+***Querying the badge service for all currently valid Credly badges 👇***
 ```js
-// Querying the badge service for all currently valid Credly badges
 getAllNonExpiredBadges = async (req: Request, res: Response) => {
       try {
           const badges: Badge[] = await this.service.getAllNonExpiredBadges();
@@ -103,7 +103,7 @@ getAllNonExpiredBadges = async (req: Request, res: Response) => {
   }
 ```
 
-And if you are curious on how you can scrap your Credly badges here’s how you can do so with Cheerio:
+And if you are curious on how you can scrap your Credly badges here’s how you can do so with Cheerio in NodeJS:
 
 ```js
 class BadgeService {
@@ -152,10 +152,9 @@ class BadgeService {
 }
 ```
 
-- Cache Service: Of course, repeatedly scraping data can be resource-intensive, which is where the caching service came into play. I deployed a Redis database and implemented an Express middleware to cache the data, primarily for Credly badges but also for certain endpoints in the Repository service.
+- ***Cache Service***: Of course, repeatedly scraping data can be resource-intensive, which is where the caching service came into play. I deployed a Redis database and implemented an Express middleware to cache the data, primarily for Credly badges but also for certain endpoints in the Repository service.
 
 ```js
-// Service
 class CacheService {
     private static _instance: CacheService;
 
@@ -181,7 +180,6 @@ class CacheService {
     }
 }
 
-// Middleware
 const cacheMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const key = getKeyFromRequest(req);
     CacheService.get(key, (err: Error, data: any) => {
@@ -197,17 +195,17 @@ const cacheMiddleware = (req: Request, res: Response, next: NextFunction) => {
 };
 ```
 
-I won't go into too much detail about the frontend, as it was a relatively simple React app with some customized Bootstrap components. It utilized data fetching to display information from the backend, and one of the more interesting features was a custom table with built-in pagination that I created to list my GitHub projects.
+I won't go into too much detail about the frontend, as it was a relatively simple React app with some customized components. It utilized data fetching to display information from the backend, and one of the more interesting features was a custom table with built-in pagination that I created to list my GitHub projects.
 
 Initially, I deployed the website using Docker on a Raspberry Pi 4 in my home. However, I eventually moved to Heroku until they discontinued their free tier services, which prompted me to switch everything over to Render (which was a bit of a hassle).
 
 Despite all of the great features and effort put into the project, I ultimately decided to discontinue it. Maintaining the website was too much overhead, and adding new features - such as a blog (which I never got around to) - would require spinning up a new service, connecting it to the frontend, and building custom components to display the data. With my limited time and resources, I realized it was time to say goodbye to this project that had started as a fun experiment.
 
-By the way, you can still visit [my old website](https://web-portfolio-frontend.onrender.com/) the code for the project can be found on Github: [Backend](https://github.com/andresromeroh/legacy-web-portfolio-node) / [Frontend](https://github.com/andresromeroh/legacy-web-portfolio-react). 
+By the way, you can find the code for my old website on Github: [Backend](https://github.com/andresromeroh/legacy-web-portfolio-node) and [Frontend](https://github.com/andresromeroh/legacy-web-portfolio-react). 
 
-## My New Static Site
+## Using NextJS to Build My New Static Site
 
-After some consideration, I realized that what I really wanted was a simple website that would allow me to focus on content creation, rather than spending countless hours on engineering a web application to showcase my skills. After all, I had already shipped several different projects and demonstrated my abilities. At this point, I simply wanted to share my experiences, and for that, a static site was the perfect solution.
+After some consideration, I realized that what I really wanted was a simple website that would allow me to focus on content creation, rather than spending countless hours on engineering a web application. At this point, I simply wanted to share my experiences, and for that, a static site was the perfect solution.
 
 I knew that NextJS would be my best bet, given its capabilities as a full-stack meta framework and its powerful static site generation features. Luckily, I found a template that I could build upon, so I started by clearing out the existing content, deploying it to the Vercel cloud (which was incredibly easy), redirecting my domain names, and adding a few of my own pages. Best of all, it came with a built-in blog, which is how you're reading my first post right now! Whenever I have something new to share, I can simply write it up, submit it to the repository, and it becomes available immediately. How cool is that?
 
