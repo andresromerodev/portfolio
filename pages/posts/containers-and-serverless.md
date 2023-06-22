@@ -17,7 +17,7 @@ That's when AWS Lambda catches your eye. You discover that you can write and exe
 <Image
   src="/images/awsdocker.jpg"
   alt="Photo"
-  width={800}
+  width={1100}
   height={500}
   priority
   className="next-image"
