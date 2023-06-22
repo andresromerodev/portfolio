@@ -1,6 +1,6 @@
 ---
 title: Containers and Serverless - Amplifying AWS Lambda with Docker Layers
-date: 2023/5/14
+date: 2023/6/22
 description: Empower serverless functions with Docker layers for enhanced containerization.
 tag: AWS, Docker
 author: You
