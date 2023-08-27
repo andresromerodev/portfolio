@@ -18,7 +18,7 @@ Since starting my career in tech, I've been fascinated by system design - specif
 
 In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching, API integrations and more. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
 
-I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a small-system diagram that looks something like this :
+I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a small-system diagram that looks something like this:
 
 <Image
   src="/images/oldsitearchitecture.jpg"
@@ -197,7 +197,7 @@ const cacheMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
 I won't go into too much detail about the frontend, as it was a relatively simple React app with some customized components. It utilized data fetching to display information from the backend, and one of the more interesting features was a custom table with built-in pagination that I created to list my GitHub projects.
 
-Initially, I deployed the website using Docker on a Raspberry Pi 4 in my home. However, I eventually moved to Heroku until they discontinued their free tier services, which prompted me to switch everything over to Render (which was a bit of a hassle).
+Initially, I deployed the website using Docker on a Raspberry Pi 4 in my home office. However, I eventually moved to Heroku until they discontinued their free tier services, which prompted me to switch everything over to Render.com (which was a bit of a hassle).
 
 Despite all of the great features and effort put into the project, I ultimately decided to discontinue it. Maintaining the website was too much overhead, and adding new features - such as a blog (which I never got around to) - would require spinning up a new service, connecting it to the frontend, and building custom components to display the data. With my limited time and resources, I realized it was time to say goodbye to this project that had started as a fun experiment.
 
@@ -212,3 +212,5 @@ I knew that NextJS would be my best bet, given its capabilities as a full-stack 
 You can explore the code for my new website on https://github.com/andresromeroh/portfolio.
 
 Overall, the entire process of building this website and the old one was a true learning experience from start to finish, and I have no regrets about the time and effort I put into it. I hope you've enjoyed reading about my journey, and I look forward to sharing more with you in the future. Thanks for reading!
+
+Enjoying my content ? Buy Me a Coffee ☕️

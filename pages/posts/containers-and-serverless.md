@@ -1,7 +1,7 @@
 ---
 title: Containers and Serverless - Amplifying AWS Lambda with Docker Layers
 date: 2023/6/22
-description: Empower serverless functions with Docker layers for enhanced containerization.
+description: Empower serverless functions with Docker Layers for enhanced containerization.
 tag: AWS, Docker
 author: You
 ---
@@ -10,9 +10,10 @@ import Image from 'next/image'
 
 # Containers and Serverless - Amplifying AWS Lambda with Docker Layers
 
-Docker is a leading technology in the software development world, it has revolutionized how we package and deploy code. Its universal compatibility is unmatched, with virtually every cloud provider offering support. Imagine, you've developed a Docker image and you're ready to push it to the cloud. You pick AWS to deploy your app to [ECS](https://aws.amazon.com/pm/ecs) with ease. Intrigued by the serverless concept, you transition to [Fargate](https://aws.amazon.com/fargate/). However, the process of creating clusters, defining tasks, and ensuring scalability proves more complicated than anticipated.
+Docker is a leading technology in the software development world, it has revolutionized how we package and deploy code. Its universal compatibility is unmatched, with every cloud provider offering support.
+Imagine you've developed a Dockerized app and you're ready to push it to the cloud. You pick AWS to deploy your app to [ECS](https://aws.amazon.com/pm/ecs) with ease, but the process of creating clusters, defining tasks, and ensuring scalability proves more complicated than anticipated.
 
-That's when AWS Lambda catches your eye. You discover that you can write and execute your code seamlessly, but you're concerned about what might happen to your Docker images. Fear not - [AWS Lambda now supports Docker containers](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html)!
+Well let me tell you there is an easier way, [AWS Lambda now supports Docker containers](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html).
 
 <Image
   src="/images/awsdocker.jpg"
@@ -23,9 +24,9 @@ That's when AWS Lambda catches your eye. You discover that you can write and exe
   className="next-image"
 />
 
-But wait a minute, there's a catch!. You want to develop multiple apps using the same programming language and the same shared code libraries. As these projects grow, your continuous integration/continuous delivery (CI/CD) process will require packaging the same libraries and other dependencies over and over, leading to extended deployment times.
+Now, you may want to develop multiple apps using the same programming language and the same shared code libraries. As project grows, your CI/CD process will require packaging the same libraries and other dependencies over and over, leading to extended deployment times.
 
-Lambda functions have a solution for this issue in the form of Lambda layers, but the convenience of Docker's control over code execution has become essential to your development process. So, what if you could implement a similar concept with your Docker images? The good news is you can, and I'm going to show you how.
+Lambda functions have a solution for this issue in the form of Lambda layers, but the convenience of Docker's control over code execution has become essential to your development process. So, what if you could implement a similar concept with your Docker images? The good news is you can, let me show you how.
 
 ## Project Setup
 
@@ -42,7 +43,7 @@ import uuid
 import boto3
 
 dynamodb =  boto3.resource("dynamodb")
-database = dynamodb.Table("lambda-docker-poc")
+database = dynamodb.Table("lambda-docker")
 
 def handler(event, context):
     object_uuid = str(uuid.uuid4())
@@ -66,15 +67,15 @@ markupsafe==2.0.1
 
 Before we delve into the Docker aspect, let's streamline our code deployment process. To do this, we'll create a new application using the Serverless Framework.
 
-I won't elaborate on the steps to establish your Serverless account or how to link it with AWS - you can follow their official guide for that purpose: **[https://www.serverless.com/framework/docs/getting-started](https://www.serverless.com/framework/docs/getting-started)**
+I won't go into the steps required to setup your Serverless account or how to link it with AWS, but you can follow their official guide: **[https://www.serverless.com/framework/docs/getting-started](https://www.serverless.com/framework/docs/getting-started)**
 
-Presuming you've successfully set up a new Serverless application, you can proceed by executing the following command:
+Once you've successfully set up your Serverless account, you can setup a new app by executing the following command:
 
 ```bash
 npm i -g serverless && serverless \
     --org=yourorgname\
-    --app=aws-lambda-docker-poc \
-    --name=aws-lambda-docker-poc \
+    --app=aws-lambda-docker \
+    --name=aws-lambda-docker \
     --template=aws-python
 ```
 
@@ -87,8 +88,8 @@ Once you've set up these resources, you'll need a 'serverless.yml' configuration
 
 ```yaml
 org: yourorgname
-app: aws-lambda-docker-poc
-service: aws-lambda-docker-poc
+app: aws-lambda-docker
+service: aws-lambda-docker
 
 frameworkVersion: '3'
 
@@ -115,7 +116,7 @@ provider:
             - "dynamodb:UpdateItem"
             - "dynamodb:DeleteItem"
 					# Replace 'accountid' with your own account
-          Resource: ["arn:aws:dynamodb:us-east-1:accountid:table/lambda-docker-poc"]
+          Resource: ["arn:aws:dynamodb:us-east-1:accountid:table/lambda-docker"]
 
 functions:
   handler:
@@ -135,7 +136,7 @@ We've now completed the setup of our project. However, we're not ready to run it
 
 ## Building our Docker Image and Layer
 
-Now, consider Boto3 as a library that we frequently bundle for our apps, as they all operate and interact with AWS services and infrastructure. How could we minimize redundancy and promote reusability by converting this dependency (and any others) into a reusable layer?
+Now, consider **`boto3`** as a library that we frequently bundle for our apps, as they all operate and interact with AWS services and infrastructure. How could we minimize redundancy and promote reusability by converting this dependency (and any others) into a reusable layer?
 
 The answer lies in using Docker layers. Docker natively supports the concept of layers, enabling us to compartmentalize different parts of our application for easy replication and modification.
 
@@ -202,7 +203,7 @@ The Dockerfile dedicated to the function comprises commands that pull files from
 
 ## Deploying the Code with GitHub Actions
 
-In an effort to maintain simplicity and bypass the need for manual image uploads to ECR, we'll leverage GitHub Actions to establish our CI/CD (Continuous Integration/Continuous Deployment) pipeline. This will automate our deployment process, reducing the risk of errors and streamlining operations.
+In an effort to maintain simplicity and bypass the need for manual image uploads to ECR, we'll leverage GitHub Actions to establish our CI/CD (Continuous Integration/Continuous Deployment) pipeline. This will automate our deployment process, reducing the risk of errors.
 
 Much like with Docker, we'll create two YML files, which will reside in the .github/workflows directory. Both of these workflows will adhere to GitHub's official guide for Amazon Elastic Container Service (ECS).
 
@@ -263,7 +264,7 @@ jobs:
 
 Take note that before we can utilize these pipelines, we need to establish a few environment variables. Here's the list you'll need to set up: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY , AWS_REGION, ECR_REGISTRY and ECR_REPOSITORY.
 
-You can set them from→ GitHub Steps
+You can set them from → GitHub Steps
 
 When it comes to AWS credentials, you have a couple of options. You can use the same set of credentials you established for Serverless, or you can create a new set of credentials dedicated solely to CI/CD operations. The choice depends on your specific needs and preferences.
 
@@ -351,17 +352,28 @@ This action will read our **`serverless.yml`** configuration file and push the u
 
 Here are the steps to follow to test our setup:
 
-1. Manually trigger the Layer action from GitHub Actions. Once completed, it should automatically initiate the Function action.
+1. Trigger the Layer action from GitHub. Once completed, it should automatically initiate the Function action.
 2. After both actions have finished, log into your AWS account and navigate to AWS Lambda.
 3. You'll find a new function with the name you specified. Open it and go to the 'Test' section.
-4. Emit an event using the provided payload.
+4. Emit an event using the default payload.
 5. Next, switch to DynamoDB and open the table you created earlier.
-6. Query the table, and you'll see the entry you just made. Great, it's working!
-7. Now, let's experiment with the actions.
-8. Add a **`print`** statement to the **`app.py`** function and commit it to the main branch. Observe how it only triggers the Function pipeline.
-9. Finally, upgrade boto3 to version 1.26.87 and commit the change. Notice how it triggers the Layer pipeline first and then subsequently activates the Function pipeline.
+6. Query the table, and you should see the entry you just made. 
 
-This shows you the flexibility and efficiency of our setup in action, demonstrating how changes can be propagated quickly and effectively.
+<Image
+  src="/images/dynamodbtable.jpg"
+  alt="Photo"
+  width={500}
+  height={200}
+  priority
+  className="next-image"
+/>
+
+Now, let's experiment with the actions:
+
+1. Add a **`print`** statement to the **`app.py`** function and commit it to the main branch. Observe how it only triggers the Function pipeline.
+2. Finally, upgrade boto3 to version 1.26.87 and commit the change. Notice how it triggers the Layer pipeline first and then subsequently activates the Function pipeline.
+
+This shows you the flexibility and efficiency of our setup in action, demonstrating how changes can be propagated quickly and effectively!
 
 ## Closing Comments
 

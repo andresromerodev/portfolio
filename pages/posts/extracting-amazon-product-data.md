@@ -48,7 +48,7 @@ This is where Selenium comes into play. By employing the Chrome web driver, each
 
 ## Numerous Product Pages on Amazon Feature Diverse and Varied Sections
 
-Ensuring the accuracy of your scraped data will require multiple checks. You might come across a single section, such as the categories, that presents itself in two distinct formats. However, these challenges can be effectively addressed by cleverly using a few conditional (IF) statements.
+Ensuring the accuracy of your scraped data will require multiple checks. You might come across a single section, such as the categories, that presents itself in two distinct formats. However, these challenges can be effectively addressed by using a few conditional statements.
 
 <Image
   src="/images/amazoncategories.jpg"
@@ -59,7 +59,7 @@ Ensuring the accuracy of your scraped data will require multiple checks. You mig
   className="next-image"
 />
 
-## The Efficiency of Your Scraping Bot may Need Improvement
+## Your Scraping Bot may Need an Artificial Delay
 
 Certain vital information, such as whether an item is in stock, can only be determined once the page has completely loaded and all the underlying JavaScript code has been executed. Consequently, you may need to allow up to a full second for the page to load properly.
 
@@ -73,7 +73,7 @@ The implementation of the bot is entirely up to your preference - it could take 
 
 ## Configuring the Project
 
-Incorporating Selenium and BeautifulSoup into your project is a straightforward process. You can add them using pip and download the Chrome web driver (or the driver for your preferred browser), storing it in the base folder of your project. Similarly, any other required libraries can be installed using pip.
+Incorporating Selenium and BeautifulSoup into your project is a straightforward process. You can add them using pip and download the Chrome web driver (or the driver for your preferred browser), storing it in the base folder of your project.
 
 ```bash
 pip install selenium beautifulsoup4
@@ -81,7 +81,7 @@ pip install selenium beautifulsoup4
 
 Chrome Driver: **[https://chromedriver.chromium.org/downloads](https://chromedriver.chromium.org/downloads)**
 
-After installation, you can instantiate a new driver. Consider this the birth of your data extraction bot.
+After installation, you can instantiate a new driver. Consider this the start point of your data extraction bot.
 
 ```python
 PATH = './drivers/chromedriver.exe' # This should be the folder containing the driver
