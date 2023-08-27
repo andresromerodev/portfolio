@@ -362,8 +362,8 @@ Here are the steps to follow to test our setup:
 <Image
   src="/images/dynamodbtable.jpg"
   alt="Photo"
-  width={500}
-  height={200}
+  width={1100}
+  height={500}
   priority
   className="next-image"
 />
