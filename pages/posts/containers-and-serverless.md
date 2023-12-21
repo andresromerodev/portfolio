@@ -10,10 +10,11 @@ import Image from 'next/image'
 
 # Containers and Serverless - Amplifying AWS Lambda with Docker Layers
 
-Docker is a leading technology in the software development world, it has revolutionized how we package and deploy code. Its universal compatibility is unmatched, with every cloud provider offering support.
+Docker is a leading technology in the software development world, it has revolutionized how we package and deploy code with almost every cloud provider offering support.
+
 Imagine you've developed a Dockerized app and you're ready to push it to the cloud. You pick AWS to deploy your app to [ECS](https://aws.amazon.com/pm/ecs) with ease, but the process of creating clusters, defining tasks, and ensuring scalability proves more complicated than anticipated.
 
-Well let me tell you there is an easier way, [AWS Lambda now supports Docker containers](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html).
+Well... there is an easier way: [Running Docker Containers on AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html).
 
 <Image
   src="/images/awsdocker.jpg"
@@ -24,15 +25,15 @@ Well let me tell you there is an easier way, [AWS Lambda now supports Docker con
   className="next-image"
 />
 
-Now, you may want to develop multiple apps using the same programming language and the same shared code libraries. As project grows, your CI/CD process will require packaging the same libraries and other dependencies over and over, leading to extended deployment times.
+Now, you may want to develop multiple apps using the same programming language and the same shared code libraries on Lambda. As the apps grow, your CI/CD (Continuous Integration/Continuous Deployment) process will require packaging the same dependencies over and over, leading to extended deployment times.
 
-Lambda functions have a solution for this issue in the form of Lambda layers, but the convenience of Docker's control over code execution has become essential to your development process. So, what if you could implement a similar concept with your Docker images? The good news is you can, let me show you how.
+Regular Lambda functions have a solution for this issue in the form of layers, So, what if you could implement a similar concept with your Docker images on Lambda? The good news is you can, let me show you how.
 
 ## Project Setup
 
 We're going to work with a basic Python app for our example. It starts running when a new event happens, we will use the AWS console to trigger this event.
 
-The app has two jobs. It takes any data from the event and stores it in a DynamoDB table with a special ID. Once it's done, it sends back a message saying everything is OK (HTTP 200 status).
+The app has two jobs. It takes any data from the event and stores it in a DynamoDB table with a unique ID. Once it's done, it sends back a message saying everything is OK (HTTP 200).
 
 To talk to DynamoDB, we're going to use Boto3.
 
@@ -67,9 +68,9 @@ markupsafe==2.0.1
 
 Before we delve into the Docker aspect, let's streamline our code deployment process. To do this, we'll create a new application using the Serverless Framework.
 
-I won't go into the steps required to setup your Serverless account or how to link it with AWS, but you can follow their official guide: **[https://www.serverless.com/framework/docs/getting-started](https://www.serverless.com/framework/docs/getting-started)**
+I won't go into the steps required to set up a Serverless account or how to link it to AWS, but you can follow their official guide: **[https://www.serverless.com/framework/docs/getting-started](https://www.serverless.com/framework/docs/getting-started)**
 
-Once you've successfully set up your Serverless account, you can setup a new app by executing the following command:
+Once you've successfully set up your Serverless account, you can create a new app by executing the following command:
 
 ```bash
 npm i -g serverless && serverless \
@@ -79,7 +80,7 @@ npm i -g serverless && serverless \
     --template=aws-python
 ```
 
-Now, it's time to set up some resources in AWS. Specifically, we need to create a DynamoDB table and two ECR (Elastic Container Registry) repositories. One repository will host our Docker function image, while the other will store the layer. For detailed instructions on how to create these resources, I recommend referring to the official AWS guides:
+Now, it's time to provision some resources in AWS. We need to create a DynamoDB table and two ECR (Elastic Container Registry) repositories. One repository will host our Docker function image, while the other will store the layer. For detailed instructions on how to create these resources, I recommend referring to the official AWS guides:
 
 1. **[How to Create a DynamoDB Table](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/getting-started-step-1.html)**
 2. **[How to Create a Private ECR Repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html)**
@@ -146,7 +147,7 @@ Therefore, we're going to proceed by creating two Dockerfiles.
 
 We're going to construct the layer as a container image. Similar to how Lambda layers are attached to a .zip archive function, container layers are also added to other container images.
 
-To maintain the same file path as Lambda layers, it's crucial that the respective files in the published container images are located in the /opt directory. This approach ensures consistency in file paths, aiding in the smooth functioning of the application.
+To maintain the same file path as Lambda layers, it's crucial that the respective files in the published container images are located in the /opt directory. This approach ensures consistency in file paths, helping the application run smoothly.
 
 ```
 FROM python:3.8-alpine AS installer
@@ -203,9 +204,9 @@ The Dockerfile dedicated to the function comprises commands that pull files from
 
 ## Deploying the Code with GitHub Actions
 
-In an effort to maintain simplicity and bypass the need for manual image uploads to ECR, we'll leverage GitHub Actions to establish our CI/CD (Continuous Integration/Continuous Deployment) pipeline. This will automate our deployment process, reducing the risk of errors.
+In an effort to maintain simplicity and bypass the need for manual image uploads to ECR, we'll leverage GitHub Actions to establish our CI/CD pipeline. This will automate our deployment process, reducing the risk of errors.
 
-Much like with Docker, we'll create two YML files, which will reside in the .github/workflows directory. Both of these workflows will adhere to GitHub's official guide for Amazon Elastic Container Service (ECS).
+Much like with Docker, we'll create two YML files, which will reside in the .github/workflows directory. Both of these workflows will adhere to GitHub's official [guide](https://docs.github.com/en/actions/deployment/deploying-to-your-cloud-provider/deploying-to-amazon-elastic-container-service) for Amazon Elastic Container Service (ECS).
 
 ### layer.yml
 
@@ -263,8 +264,6 @@ jobs:
 ```
 
 Take note that before we can utilize these pipelines, we need to establish a few environment variables. Here's the list you'll need to set up: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY , AWS_REGION, ECR_REGISTRY and ECR_REPOSITORY.
-
-You can set them from → GitHub Steps
 
 When it comes to AWS credentials, you have a couple of options. You can use the same set of credentials you established for Serverless, or you can create a new set of credentials dedicated solely to CI/CD operations. The choice depends on your specific needs and preferences.
 
@@ -377,4 +376,4 @@ This shows you the flexibility and efficiency of our setup in action, demonstrat
 
 ## Closing Comments
 
-I hope this guide has been helpful in showing you how to combine Docker and serverless technologies, while also streamlining your CI/CD pipelines with Docker layers. If anything is still unclear, feel free to drop me an email. Looking forward to sharing more in the future!
+I hope this guide has been helpful in showing you how to combine Docker and serverless technologies. If anything is still unclear, feel free to drop me an email. Looking forward to sharing more in the future!
