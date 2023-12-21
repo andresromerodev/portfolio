@@ -10,15 +10,16 @@ import Image from 'next/image'
 
 # From Full-Stack Overload to Streamlined Simplicity - My Journey to a Static Site
 
-I'm excited to be diving into the world of blogging with my first post, and I've decided to share my thoughts on my website, or rather my second website and why I decided to move away from the old one. I hope you'll find my perspective informative and engaging.
+I'm excited to be diving into the world of blogging with my first post, and I've decided to share my thoughts on my website, or rather my second website and why I decided to move away from the old one. I hope you'll find my content informative and engaging.
 
 ## What Led Me to Abandon My First Website
 
 Since starting my career in tech, I've been fascinated by system design - specifically, what goes into creating scalable, maintainable, and efficient applications. I'm particularly interested in building apps that adhere to the [12-factor app](https://12factor.net) principles, as I believe they offer a solid framework for developing high-quality software.
 
-In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching, API integrations and more. I knew this might seem like overkill for a web portfolio, but I relished the challenge as an opportunity to learn and grow.
+In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching and more. 
+So I decided to create a web protfolio and incorporate these technlogies, I knew this might seem like overkill for portfolio, but I relished the challenge as an opportunity to learn.
 
-I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a small-system diagram that looks something like this:
+I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a system diagram that looks something like this:
 
 <Image
   src="/images/oldsitearchitecture.jpg"
@@ -33,7 +34,7 @@ I built the backend using NodeJS and Typescript, and one thing I'm particularly 
 
 Each service in the backend had a distinct purpose:
 
-- **Email Service**: responsible for handling emails generated from the contact form on the website, and it interacted directly with SendGrid via their SDK, if you don't know SendGrid is a cloud-based email delivery service that simplifies and streamlines the process of sending and managing emails.
+- **Email Service**: responsible for handling emails generated from the contact form on the website, and it interacted directly with SendGrid via their SDK, if you don't know SendGrid is a cloud-based email delivery service that simplifies the process of sending and managing emails.
 
 ***Sending emails through the Email service 👇***
 ```js
@@ -84,7 +85,7 @@ searchPublicRepos = async (req: Request, res: Response) => {
 }
 ```
 
-- **Badge Service**: this one was particularly interesting. I had a couple of Credly badges over time, including those for my AWS certifications, and I wanted to display them on my website in real-time. Unfortunately, Credly did not offer an API for this, so I opted to scrape their website instead. Thankfully, their site was static, and their naming conventions for UI identifiers were consistent, which allowed me to scrape my own Credly data.
+- **Badge Service**: this one was particularly interesting. I got a couple of [Credly](https://info.credly.com/) badges over time, including those for my AWS certifications, and I wanted to display them on my website in near real-time after getting them without manual intervention. Unfortunately, Credly did not offer an API for this, so I opted to scrape their website instead. Thankfully, their site was static, and their naming conventions for UI identifiers were consistent, which allowed me to scrape their data.
 
 ***Querying the badge service for all currently valid Credly badges 👇***
 ```js
@@ -195,7 +196,7 @@ const cacheMiddleware = (req: Request, res: Response, next: NextFunction) => {
 };
 ```
 
-I won't go into too much detail about the frontend, as it was a relatively simple React app with some customized components. It utilized data fetching to display information from the backend, and one of the more interesting features was a custom table with built-in pagination that I created to list my GitHub projects.
+I won't go into too much detail about the frontend, as it was a relatively simple React app with some customized components. It utilized http data fetching to display information from the backend, and one of the more interesting features was a custom table with built-in pagination that I created to list my GitHub projects.
 
 Initially, I deployed the website using Docker on a Raspberry Pi 4 in my home office. However, I eventually moved to Heroku until they discontinued their free tier services, which prompted me to switch everything over to Render.com (which was a bit of a hassle).
 
@@ -211,6 +212,4 @@ I knew that NextJS would be my best bet, given its capabilities as a full-stack 
 
 You can explore the code for my new website on https://github.com/andresromeroh/portfolio.
 
-Overall, the entire process of building this website and the old one was a true learning experience from start to finish, and I have no regrets about the time and effort I put into it. I hope you've enjoyed reading about my journey, and I look forward to sharing more with you in the future. Thanks for reading!
-
-Enjoying my content ? Buy Me a Coffee ☕️
+Overall, the entire process of building this website and the old one was a true learning experience from start to finish, and I have no regrets about the time and effort I put into it. I hope you've enjoyed the post, and I look forward to sharing more with you in the future. Thanks for reading!

@@ -25,7 +25,7 @@ Not too long ago, I had the chance to work on a project where I extracted produc
 
 - **Python**: A versatile programming language for data handling.
 - **Selenium**: A useful automation tool for interacting with dynamic web pages.
-- **BeautifulSoup**: An effective solution for working with and manipulating HTML tags.
+- **BeautifulSoup**: An effective library for working with and manipulating HTML tags.
 
 # Things to Keep in Mind
 
@@ -44,7 +44,7 @@ You'll need to manage the rotation of User-Agent headers (a header that describe
   className="next-image"
 />
 
-This is where Selenium comes into play. By employing the Chrome web driver, each data extraction is conducted through a new browser session, which Amazon interprets as a regular activity.
+This is where Selenium comes into play. By employing a web driver, each data extraction is conducted through a new browser session, which Amazon interprets as a regular activity.
 
 ## Numerous Product Pages on Amazon Feature Diverse and Varied Sections
 
@@ -69,11 +69,12 @@ Keeping your computer operational for extended periods might not be feasible. In
 
 # Scrapping Product Data
 
-The implementation of the bot is entirely up to your preference - it could take the form of a desktop application, a cloud service, or even a simple script. In this post, I'm primarily focused on sharing the code for data scraping. The rest of the implementation is your playground!
+The implementation of the bot is entirely up to your preference; it could take the form of a desktop application, a cloud service, or even a simple script. In this post, I am primarily focused on sharing the code for data scraping. The rest of the implementation is your playground! However, I would like to share my own implementation, which was developed in the form of a Python desktop app: https://github.com/andresromerodev/amazon-product-reports.
 
 ## Configuring the Project
 
 Incorporating Selenium and BeautifulSoup into your project is a straightforward process. You can add them using pip and download the Chrome web driver (or the driver for your preferred browser), storing it in the base folder of your project.
+If your goal is to run this in the cloud and you don't have a graphic user interface I recommend you to use a headless web drivers.
 
 ```bash
 pip install selenium beautifulsoup4
@@ -142,7 +143,7 @@ Below are some useful code snippets that you can employ to extract the primary p
 try:
     name = soup.find(id='productTitle').get_text().strip()
 except:
-    sys.exit() # When there is no name product is no longer available
+    print("no product found (dog page)") # When there is no name product is no longer available
 ```
 
 ### Out of Stock
@@ -158,10 +159,10 @@ except:
 ### Q&A Count
 
 ```python
-qa_html = soup.select('#askATFLink')
 try:
-    qa_count = qa_html[0].find_all('span')[0].get_text()
-    qa_count = int(''.join(filter(str.isdigit, qa_count)))
+    qa_html = soup.select('#askATFLink')
+    qa_text = qa_html[0].find_all('span')[0].get_text()
+    qa_count = int(''.join(filter(str.isdigit, qa_text)))
 except:
     qa_count = 0
 ```
@@ -169,10 +170,10 @@ except:
 ### Star Count
 
 ```python
-stars_html = soup.select('i[class*="a-icon a-icon-star a-star-"] span')
 try:
-    stars_count_str = stars_html[0].get_text().split(' ')[0].replace(",", ".")
-    stars_count = float(stars_count_str)
+    stars_html = soup.select('i[class*="a-icon a-icon-star a-star-"] span')
+    stars_text = stars_html[0].get_text().split(' ')[0].replace(",", ".")
+    stars_count = float(stars_text)
 except:
     stars_count = 0
 ```
@@ -180,9 +181,8 @@ except:
 ### Review Count
 
 ```python
-count = soup.select('#acrCustomerReviewText')A
 try:
-    review_count = int(count[0].get_text().split(' ')[0].replace(".", "").replace(',', ""))
+    review_count = int(soup.select('#acrCustomerReviewText')[0].get_text().split(' ')[0].replace(".", "").replace(',', ""))
 except:
     review_count = 0
 ```
@@ -190,18 +190,20 @@ except:
 ### Best Sellers Rank
 
 ```python
-# Use a regex to locate ranks and categories
+# Use a regex to find ranks and categories
 CATEGORIES_REGEX = '#\\d+ in |#\\d+\\,*\\d+ in'
 
-rank = []
-rank_html = soup.find_all('div', { 'id': 'detailBulletsWrapper_feature_div' })
+try:
+    rank_html = soup.find_all('div', { 'id': 'detailBulletsWrapper_feature_div' })
 
-if rank_html and 'Best Sellers Rank' in str(rank_html):
-    rank = re.findall(CATEGORIES_REGEX, str(rank_html))
-else: # If the rank is within a table view
-    rank_html = soup.find_all('table', { 'id': 'productDetails_detailBullets_sections1' })
     if rank_html and 'Best Sellers Rank' in str(rank_html):
+        rank = re.findall(CATEGORIES_REGEX, str(rank_html))
+    else: # If the rank is inside a table view
+        rank_html = soup.find_all('table', { 'id': 'productDetails_detailBullets_sections1' })
         rank = re.findall(CATEGORIES_REGEX, str(categories_html))
+except:
+    rank = []
+
 ```
 
 ### Product Categories
@@ -209,18 +211,14 @@ else: # If the rank is within a table view
 ```python
 try:
     categories_html = soup.find_all('div', {'id': 'detailBulletsWrapper_feature_div'})
+
     if categories_html and 'Best Sellers Rank' in str(categories_html):
         categories = re.findall(CATEGORIES_REGEX, str(categories_html))
     else: # If the categories are within a table view
         categories_html = soup.find_all('table', {'id': 'productDetails_detailBullets_sections1'})
-
-        if categories_html and 'Best Sellers Rank' in str(categories_html):
-            categories = re.findall(CATEGORIES_REGEX, str(categories_html))
-        else:
-            categories = []
-	except:
-	  categories = []
-	  print('Exception occurred while scrapping categories')
+        categories = re.findall(CATEGORIES_REGEX, str(categories_html)) 
+except:
+    categories = []
 ```
 
 ### Product Coupons
@@ -228,11 +226,9 @@ try:
 ```python
 try:
     coupon_html = soup.find_all('div', {'id': 'vpcButton'})
-    if coupon_html and 'coupon' in str(coupon_html):
-        coupon = re.findall('\d%|\$\d.\d+', str(coupon_html))
+    coupon = re.findall('\d%|\$\d.\d+', str(coupon_html))
 	except:
 	  coupon = ''
-	  print('Exception occurred while scrapping coupon')
 ```
 
 ### Shipping Location
@@ -240,13 +236,9 @@ try:
 ```python
 try:
     ships_from_html = soup.find_all('span', {'id': 'tabular-buybox-truncate-0'})
-    if ships_from_html:
-        ships_from = re.findall(r'<span class="tabular-buybox-text">(.*?)</span>', str(ships_from_html))
-    else:
-        ships_from = ''
+    ships_from = re.findall(r'<span class="tabular-buybox-text">(.*?)</span>', str(ships_from_html))
 except:
     ships_from = ''
-    print('Exception occurred while scrapping ships_from')
 ```
 
 ### Sold By
@@ -254,17 +246,13 @@ except:
 ```python
 try:
     sold_by_html = soup.find_all('a', {'id': 'sellerProfileTriggerId'})
-    if sold_by_html:
-        sold_by = re.findall(r'">(.*?)</a>', str(sold_by_html))
-    else:
-        sold_by = ''
+    sold_by = re.findall(r'">(.*?)</a>', str(sold_by_html))
 except:
     sold_by = ''
-    print('Exception occurred while scrapping sold_by')
 ```
 
 ## Closing Comments
 
-I trust you'll find this code beneficial, be it for a personal experiment or for streamlining your daily tasks if you frequently work with Amazon product data.
+I trust you'll find this code beneficial, be it for a personal experiment or for simplifying your daily tasks if you frequently work with Amazon product data.
 
 Thank you for taking the time to read this. I look forward to seeing you in the next one.
