@@ -17,7 +17,7 @@ I'm excited to be diving into the world of blogging with my first post, and I've
 Since starting my career in tech, I've been fascinated by system design - specifically, what goes into creating scalable, maintainable, and efficient applications. I'm particularly interested in building apps that adhere to the [12-factor app](https://12factor.net) principles, as I believe they offer a solid framework for developing high-quality software.
 
 In late 2019, I already had some coding experience under my belt from my time at IBM, where I had deployed a few apps. However, I was eager to expand my knowledge and delve into the world of DNS, environments, Docker, caching and more. 
-So I decided to create a web protfolio and incorporate these technlogies, I knew this might seem like overkill for portfolio, but I relished the challenge as an opportunity to learn.
+So I decided to create a web protfolio and incorporate these technologies, I knew this might seem like overkill for portfolio, but I relished the challenge as an opportunity to learn.
 
 I began the project by implementing a strategy to decouple the backend and frontend components into separate applications, with various services. The final design would result in a system diagram that looks something like this:
 
