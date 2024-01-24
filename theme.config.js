@@ -4,7 +4,7 @@ export default {
   footer: (
     <small style={{ display: 'block', marginTop: '8rem' }}>
       <time>{YEAR}</time> © Andrés Romero, Costa Rica.
-      <a href="mailto:andresromero.dev@gmai.com">andresromero.dev@gmai.com</a>
+      <a href="mailto:hello@andresromero.dev">hello@andresromero.dev</a>
       <style jsx>{`
         a {
           float: right;
