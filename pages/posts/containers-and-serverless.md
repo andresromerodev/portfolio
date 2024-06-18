@@ -12,9 +12,9 @@ import Image from 'next/image'
 
 Docker is a leading technology in the software development world, it has revolutionized how we package and deploy code with almost every cloud provider offering support.
 
-Imagine you've developed a Dockerized app and you're ready to push it to the cloud. You pick AWS to deploy your app to [ECS](https://aws.amazon.com/pm/ecs) with ease, but the process of creating clusters, defining tasks, and ensuring scalability proves more complicated than anticipated.
+Imagine you've developed a Dockerized system and you're ready to push it to the cloud. You choose AWS to deploy your containers to [ECS](https://aws.amazon.com/pm/ecs), AWS's container service. However, the process of creating clusters, defining tasks, and ensuring scalability proves to be more complicated than anticipated.
 
-Well... there is an easier way: [Running Docker Containers on AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html).
+Well... what if I told you there is an easier way: [Running Docker Containers on AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html).
 
 <Image
   src="/images/awsdocker.jpg"
@@ -25,7 +25,7 @@ Well... there is an easier way: [Running Docker Containers on AWS Lambda](https:
   className="next-image"
 />
 
-Now, you may want to develop multiple apps using the same programming language and the same shared code libraries on Lambda. As the apps grow, your CI/CD (Continuous Integration/Continuous Deployment) process will require packaging the same dependencies over and over, leading to extended deployment times.
+So let's say you decide to use lambda to run your Docker containers, you may want to develop multiple apps using the same programming language and the same shared code libraries. As the apps grow, your CI/CD (Continuous Integration/Continuous Deployment) process will require packaging the same dependencies over and over, leading to extended deployment times.
 
 Regular Lambda functions have a solution for this issue in the form of layers, So, what if you could implement a similar concept with your Docker images on Lambda? The good news is you can, let me show you how.
 
@@ -172,7 +172,7 @@ Creating individual container images for each layer gives you the advantage of b
 
 ### function.Dockerfile
 
-The Dockerfile syntax used for packaging a function as a container image includes certain commands. These commands pull the container image versions of Lambda layers and subsequently copy them into the function image. The image containing the shared dependencies is sourced from the Elastic Container Registry (ECR), making the overall process quite efficient.
+The Dockerfile syntax used for packaging a function as a container image includes certain commands. These commands pull the container image versions of Lambda layers and subsequently copy them into the function image. The image containing the shared dependencies is sourced from the Elastic Container Registry (ECR), making the overall process more efficient.
 
 ```python
 # Replace 'accountid' with your own account
@@ -212,7 +212,7 @@ Much like with Docker, we'll create two YML files, which will reside in the .git
 
 To put it simply, the GitHub action for the layer will only be triggered when our dependencies change (as reflected in the **`requirements.txt`** file). This is crucial because if we wish to upgrade Boto3, modify a dependency, or add a new library, we'd want the layer to be rebuilt. This ensures that our application has the most recent code for these dependencies.
 
-However, there's another advantage: saving valuable deployment time. If we've only altered our code but not the dependencies, there's no need to spend time rebuilding the layer. In such cases, the most recent layer in the ECR repository would suffice, making the deployment process more efficient.
+However, there's another advantage: saving valuable deployment time. If we've only altered our code but not the dependencies, there's no need to spend time rebuilding the layer. In such cases, the most recent layer in the ECR repository would suffice, making the deployment process faster.
 
 ```yaml
 name: Deploy Lambda Docker Layer to ECR

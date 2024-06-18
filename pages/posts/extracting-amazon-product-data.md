@@ -10,7 +10,7 @@ import Image from 'next/image'
 
 # Extracting Amazon Product Data with Python
 
-Not too long ago, I had the chance to work on a project where I extracted product data from Amazon.com. It was an interesting experience for me as it was my first time working with data scraping. Today, I would like to share some valuable insights and techniques I learned while navigating through this large e-commerce platform.
+Not too long ago, I had the chance to work on a project where I had to extract product data from Amazon.com. It was an interesting experience for me as it was my first time working with data scraping. Today, I would like to share some valuable insights and techniques I learned while navigating through this large e-commerce platform.
 
 <Image
   src="/images/amazonproductpage.jpg"
@@ -23,9 +23,9 @@ Not too long ago, I had the chance to work on a project where I extracted produc
 
 ## ****The Tech Stack****
 
-- **Python**: A versatile programming language for data handling.
-- **Selenium**: A useful automation tool for interacting with dynamic web pages.
-- **BeautifulSoup**: An effective library for working with and manipulating HTML tags.
+- **Python**: Probably one of the best languages for data handling.
+- **Selenium**: An automation tool for interacting with dynamic web pages.
+- **BeautifulSoup**: A library for working with and manipulating HTML tags.
 
 # Things to Keep in Mind
 
@@ -61,7 +61,7 @@ Ensuring the accuracy of your scraped data will require multiple checks. You mig
 
 ## Your Scraping Bot may Need an Artificial Delay
 
-Certain vital information, such as whether an item is in stock, can only be determined once the page has completely loaded and all the underlying JavaScript code has been executed. Consequently, you may need to allow up to a full second for the page to load properly.
+Certain vital information, such as whether an item is in stock, can only be determined once the page has completely loaded and all the underlying JavaScript code has been executed. Consequently, you may need to allow up to a full second (or more) for the page to load properly.
 
 ## The Need for a Cloud Platform or Additional Computational Resources may Arise
 
@@ -74,7 +74,7 @@ The implementation of the bot is entirely up to your preference; it could take t
 ## Configuring the Project
 
 Incorporating Selenium and BeautifulSoup into your project is a straightforward process. You can add them using pip and download the Chrome web driver (or the driver for your preferred browser), storing it in the base folder of your project.
-If your goal is to run this in the cloud and you don't have a graphic user interface I recommend you to use a headless web drivers.
+If your goal is to run this in the cloud and you don't have a graphic user interface I recommend you to use a headless web driver.
 
 ```bash
 pip install selenium beautifulsoup4
@@ -255,4 +255,4 @@ except:
 
 I trust you'll find this code beneficial, be it for a personal experiment or for simplifying your daily tasks if you frequently work with Amazon product data.
 
-Thank you for taking the time to read this. I look forward to seeing you in the next one.
+Thank you for taking the time to read this. I look forward to sharing the next post!.
