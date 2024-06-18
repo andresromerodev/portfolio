@@ -3,7 +3,7 @@ title: Extracting Amazon Product Data with Python
 date: 2023/5/14
 description: Learn how to effectively use web scraping to extract data from Amazon.com.
 tag: Python
-author: You
+author: Andrés Romero
 ---
 
 import Image from 'next/image'

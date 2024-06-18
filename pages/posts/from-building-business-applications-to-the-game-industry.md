@@ -3,7 +3,7 @@ title: From Building Business Applications to the Game is Industry
 date: 2024/6/18
 description: My journey into creating back-end systems for multiplayer games.
 tag: Career Development
-author: You
+author: Andrés Romero
 ---
 
 # From Building Business Applications to the Game is Industry
