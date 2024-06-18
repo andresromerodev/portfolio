@@ -8,7 +8,7 @@ author: You
 
 # From Building Business Applications to the Game is Industry
 
-It's been almost 1 year since I made my last post and exactly 1.5 years after making one of the biggest moves in my career as a Software Engineer: joining the Game Industry.
+It's been almost 1 year since I made my last post and exactly 1.5 years after making one of the riskiest but most rewarding moves in my career as a Software Engineer: joining the Game Industry.
 
 If you know me or have had the chance to work with me, you know that programming is a little more than a job for me—it’s a passion, a passion for problem solving. This passion quickly turned into a 5+ year career as a programmer.
 
