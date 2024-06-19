@@ -1,5 +1,5 @@
 ---
-title: From Building Business Applications to the Game is Industry
+title: From Building Business Applications to the Game Industry
 date: 2024/6/18
 description: My journey into creating back-end systems for multiplayer games.
 tag: Career Development
