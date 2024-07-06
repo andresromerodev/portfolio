@@ -38,7 +38,7 @@ It’s all built on technologies I already knew, but the problems are different 
 
 It’s been 1.5 years and things are going so quickly. I got to attend the GDC (Game Developers Conference) in San Francisco this year and attended so many tech talks where I learned about how the back-ends of the biggest games are built. After that, I decided that I want to stick to this industry for a long time. I had never achieved the level of work-life harmony that I have since I started working in games.
 
-Today, I continue to build the back-end of Sirocco. Keep an eye out because it’s a very special game, believe me.
+Today, I continue to build the back-end of Lunchbox for their first title. Keep an eye out because it’s a very special game. :)
 
 Besides that, as I mentioned before, there’s not much information out there about what back-end in gaming is. People don’t know you can actually pursue a career doing this. That’s something I want to change. I’ve started to speak at public events in the Costa Rica dev community about what Game Backend Development is, and I’m going to be creating content as much as possible from now on so people can learn more about it.
 
