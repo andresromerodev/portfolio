@@ -1,7 +1,7 @@
 ---
 title: From Building Business Applications to the Game Industry
 date: 2024/6/18
-description: My journey into creating back-end systems for multiplayer games.
+description: My journey into creating backend systems for multiplayer games.
 tag: Career Development
 author: Andrés Romero
 ---
@@ -18,29 +18,29 @@ But it didn’t take long before I reached an inflection point, one that I belie
 
 It was late 2022, and I was just transferred to a team developing an internal tool for a client, after an exciting few months rescuing an almost defunct Identity and Access Management platform. In this new project, I felt like I was going nowhere; my motivation wasn’t the same. Then, out of the blue, a new opportunity arrived. One of my old mentors reached out to me. He had joined a US-based company working on computer games and needed to hire a Software Engineer.
 
-Wait, computer games? But I don’t know anything about building games. I almost failed a Video Games course I took back in college because I wasn’t good at it. Seriously, it was too hard for me to grasp all the 3D and simulation stuff involved in games. I was lucky enough to be good at almost everything else programming-wise, and I ended up landing a successful career as a full-stack developer working on both front-end and back-end business applications, though I always had a small preference for working on the back-end side of things.
+Wait, computer games? But I don’t know anything about building games. I almost failed a Video Games course I took back in college because I wasn’t good at it. Seriously, it was too hard for me to grasp all the 3D and simulation stuff involved in games. I was lucky enough to be good at almost everything else programming-wise, and I ended up landing a successful career as a full-stack developer working on both frontend and backend business applications, though I always had a small preference for working on the backend side of things.
 
-Immediately after thinking, “This opportunity is not for me,” I received the punchline: it’s a back-end role.
+Immediately after thinking, “This opportunity is not for me,” I received the punchline: it’s a backend role.
 
-What, back-end for games? Is that a thing? It is! And it’s a huge part of multiplayer and live service games.
+What, backend for games? Is that a thing? It is! And it’s a huge part of multiplayer and live service games.
 
 Even though I had decided building games was not my thing back in college, that didn’t change the fact that I was a lifelong gamer. Ever since I can remember, I’ve played video games. My earliest memories involve playing Super Nintendo with my brothers as a child or spending time at my dad’s arcade, where kids would spend hours playing video games. Video games have always been in my life. I was lucky enough that my dad always had connections to get the latest tech stuff before it even arrived in Costa Rica. I was one of the first kids to have both the PlayStation One and PlayStation Two, as well as many other consoles like the Nintendo 64 and Dreamcast. To this day, I've always had video games.
 
 I’ve played an infinite number of games, but I can tell you the ones I’ve enjoyed the most are the ones I play with friends and family—multiplayer games.
 
-At that moment, everything clicked. All the games I play online: Call of Duty, FIFA, GTA, Fall Guys, Brawlhalla, etc. THEY ALL NEED A BACK-END. Authentication, accounts, parties, player inventory—all these features need a back-end system to support them.
+At that moment, everything clicked. All the games I play online: Call of Duty, FIFA, GTA, Fall Guys, Brawlhalla, etc. THEY ALL NEED A backend. Authentication, accounts, parties, player inventory—all these features need a backend system to support them.
 
-I didn’t think much about the offer, even though I noticed it was hard to find references about what back-end in gaming was all about. So I took the risk. I quit my job and decided to join the company I work for today: Lunchbox Entertainment, a US game studio working on their first title, a MOBA game called Sirocco.
+I didn’t think much about the offer, even though I noticed it was hard to find references about what backend in gaming was all about. So I took the risk. I quit my job and decided to join the company I work for today: Lunchbox Entertainment, a US game studio working on their first title, a MOBA game called Sirocco.
 
 And oh boy, it’s been a wild ride. Those things were just the tip of the iceberg. There were so many more things: matchmaking, dedicated game servers, engine SDKs, sessions, leaderboards, payments, and more!
 
-It’s all built on technologies I already knew, but the problems are different from the ones I used to face while building business software. And they’re more fun because you get to use them in games! All the back-end stuff like databases, caching, messaging systems, and your favorite languages like JS, Go, Python—they are all used to build the same back-end systems you know but for your favorite games.
+It’s all built on technologies I already knew, but the problems are different from the ones I used to face while building business software. And they’re more fun because you get to use them in games! All the backend stuff like databases, caching, messaging systems, and your favorite languages like JS, Go, Python—they are all used to build the same backend systems you know but for your favorite games.
 
-It’s been 1.5 years and things are going so quickly. I got to attend the GDC (Game Developers Conference) in San Francisco this year and attended so many tech talks where I learned about how the back-ends of the biggest games are built. After that, I decided that I want to stick to this industry for a long time. I had never achieved the level of work-life harmony that I have since I started working in games.
+It’s been 1.5 years and things are going so quickly. I got to attend the GDC (Game Developers Conference) in San Francisco this year and attended so many tech talks where I learned about how the backends of the biggest games are built. After that, I decided that I want to stick to this industry for a long time. I had never achieved the level of work-life harmony that I have since I started working in games.
 
-Today, I continue to build the back-end of Lunchbox for their first title. Keep an eye out because it’s a very special game. :)
+Today, I continue to build the backend of Lunchbox for their first title. Keep an eye out because it’s a very special game. :)
 
-Besides that, as I mentioned before, there’s not much information out there about what back-end in gaming is. People don’t know you can actually pursue a career doing this. That’s something I want to change. I’ve started to speak at public events in the Costa Rica dev community about what Game Backend Development is, and I’m going to be creating content as much as possible from now on so people can learn more about it.
+Besides that, as I mentioned before, there’s not much information out there about what backend in gaming is. People don’t know you can actually pursue a career doing this. That’s something I want to change. I’ve started to speak at [public events](https://www.linkedin.com/feed/update/urn:li:activity:7195120566918356992/) in the Costa Rica dev community about what Game Backend Development is, and I’m going to be creating content as much as possible from now on so people can learn more about it.
 
 So if you’re interested in learning more or starting your career in games as I did, follow me or reach out directly with questions.
 

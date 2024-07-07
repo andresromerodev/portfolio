@@ -1,7 +1,7 @@
 ---
 title: From Full-Stack Overload to Streamlined Simplicity - My Journey to a Static Site
 date: 2023/5/03
-description: Why I Abandoned My Full-Stack Website and Opted for a Backend-Free Solution.
+description: Why I abandoned my full-stack website and opted for a static solution.
 tag: NodeJS,React
 author: Andrés Romero
 ---
