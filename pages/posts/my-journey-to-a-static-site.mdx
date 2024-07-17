@@ -36,12 +36,6 @@ Each service in the backend had a distinct purpose:
 
 - **Email Service**: responsible for handling emails generated from the contact form on the website, and it interacted directly with SendGrid via their SDK, if you don't know SendGrid is a cloud-based email delivery service that simplifies the process of sending and managing emails.
 
-```js filename="test.js" {1}
-console.log('hello world')
-
-console.log('goodbye world')
-```
-
 ***Sending emails through the Email service***
 ```js
 sendEmail = async (req: Request, res: Response) => {
