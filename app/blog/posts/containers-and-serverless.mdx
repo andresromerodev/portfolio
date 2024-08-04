@@ -1,14 +1,10 @@
 ---
-title: Containers and Serverless - Amplifying AWS Lambda with Docker Layers
-date: 2023/6/22
-description: Enhance serverless functions with Docker layers for better containerization.
-tag: AWS, Docker
-author: Andrés Romero
+title: 'Amplifying AWS Lambda with Docker Layers'
+publishedAt: '2023-06-22'
+summary: 'Enhance serverless functions with Docker layers for better containerizatio.'
 ---
 
 import Image from 'next/image'
-
-# Containers and Serverless - Amplifying AWS Lambda with Docker Layers
 
 Docker is a leading technology in the software development world, it has revolutionized how we package and deploy code with almost every cloud provider offering support.
 
@@ -19,8 +15,8 @@ Well... what if I told you there is an easier way: [Running Docker Containers on
 <Image
   src="/images/awsdocker.jpg"
   alt="Photo"
-  width={1100}
-  height={500}
+  width={450}
+  height={200}
   priority
   className="next-image"
 />
@@ -263,7 +259,7 @@ jobs:
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 ```
 
-Take note that before we can utilize these pipelines, we need to establish a few environment variables. Here's the list you'll need to set up: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY , AWS_REGION, ECR_REGISTRY and ECR_REPOSITORY.
+Take note that before we can utilize these pipelines, we need to establish a few environment variables. Here's the list you'll need to set up: `AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY , AWS_REGION, ECR_REGISTRY and ECR_REPOSITORY`.
 
 When it comes to AWS credentials, you have a couple of options. You can use the same set of credentials you established for Serverless, or you can create a new set of credentials dedicated solely to CI/CD operations. The choice depends on your specific needs and preferences.
 
@@ -285,12 +281,13 @@ on:
     branches:
       - main
     paths:
-      - app.py # or a folder containing the function code (i.e: src/**)
+      - app.py # or a folder containing the function code
 
   workflow_dispatch:
 
 env:
   ECR_REPOSITORY: lambda-docker-function-repository
+
 permissions:
   contents: read
 
@@ -302,45 +299,45 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
-      id: build-image
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: latest
-      run: |
-        docker build --platform linux/amd64 -f function.Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: latest
+        run: |
+          docker build --platform linux/amd64 -f function.Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - run: npm ci
+      - run: npm ci
 
-    - name: Serverless Deploy
-      uses: serverless/github-action@v3
-      with:
-        args: deploy
-      env:
-        SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Serverless Deploy
+        uses: serverless/github-action@v3
+        with:
+          args: deploy
+        env:
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 ```
 
 The function pipeline carries another crucial responsibility: it deploys our function to AWS Lambda! Thanks to the Serverless Framework, this task is incredibly straightforward. All we need to do is install NodeJS and run **`npm ci`** to bring in the necessary Serverless dependencies. Once the dependencies are installed, the deployment is as simple as executing the **`serverless deploy`** command within the official GitHub action.
@@ -356,7 +353,9 @@ Here are the steps to follow to test our setup:
 3. You'll find a new function with the name you specified. Open it and go to the 'Test' section.
 4. Emit an event using the default payload.
 5. Next, switch to DynamoDB and open the table you created earlier.
-6. Query the table, and you should see the entry you just made. 
+6. Query the table, and you should see the entry you just made.
+
+<br />
 
 <Image
   src="/images/dynamodbtable.jpg"
@@ -366,6 +365,8 @@ Here are the steps to follow to test our setup:
   priority
   className="next-image"
 />
+
+<br />
 
 Now, let's experiment with the actions:
 
