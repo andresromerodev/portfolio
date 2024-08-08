@@ -329,7 +329,7 @@ For the purposes of this tutorial, we'll tag the image as "latest" and then uplo
 docker image push docker.io/YOURUSERNAME/godotagonesmultiplayer:latest 
 ```
 
-# How to Start a Game Server
+## How to Start a Game Server
 
 At this point, you should have the main two pieces: 1) Agones and 2) an image for your game server. Now, we need to instruct Agones on how to run the game server image. For this, we are going to create a Kubernetes manifest file. I've named mine `gameserver.yaml`. This manifest file tells Agones how the game server should run, specifying details such as CPU, memory, ports, and even rules for health checking.
 
@@ -399,7 +399,7 @@ Waiting For Players!
 [AGONES] POST /health
 ```
 
-# Time to Play! Connecting to the Server
+## Time to Play! Connecting to the Server
 
 Finally, let’s connect and play! If you haven't already, you run 2 instances of the game using Godot. Alternatively, you can generate a client build for Windows, Mac, or Linux using the same Export process we used for the game server. Once the clients are launched, you'll want to enter the IP and Port displayed after running `kubectl get gameservers`.
 
@@ -442,7 +442,7 @@ Now, pick one of the two clients as the leader and click on 'Start Game,' and vo
 
 Not the best game I know, and you probably noticed there is no win condition other than falling off the platform, lol. But the idea is to help you understand the concepts around dedicated game servers rather than focusing on gameplay—I’ll leave that to the gameplay devs. ;)
 
-# Closing comments
+## Closing comments
 
 You made it all the way to the end, awesome! I know Kubernetes can be a challenging topic, especially for beginners. It might have caused you a headache, or maybe you've become even more curious and want to keep learning! Either way, I want to let you know that you’re not alone. Feel free to reach out with questions—I'm just one ping away from you on LinkedIn or Twitter, and all DMs are welcome! I hope you enjoyed it.
 
