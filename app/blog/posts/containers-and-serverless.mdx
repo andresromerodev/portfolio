@@ -1,16 +1,14 @@
 ---
-title: 'Amplifying AWS Lambda with Docker Layers'
+title: 'Amplifying AWS Lambda with Docker'
 publishedAt: '2023-06-22'
 summary: 'Enhance serverless functions with Docker layers for better containerizatio.'
 ---
 
 import Image from 'next/image'
 
-Docker is a leading technology in the software development world, it has revolutionized how we package and deploy code with almost every cloud provider offering support.
+Docker has fundamentally changed how we develop and deploy software, supported by major cloud providers like AWS. If you've Dockerized your app and are facing complexities deploying it to either ECS (Elastic Container Service) or EKS (Elastic Kubernetes Service), consider an alternative approach: [Running Docker Containers on AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html).
 
-Imagine you've developed a Dockerized system and you're ready to push it to the cloud. You choose AWS to deploy your containers to [ECS](https://aws.amazon.com/pm/ecs), AWS's container service. However, the process of creating clusters, defining tasks, and ensuring scalability proves to be more complicated than anticipated.
-
-Well... what if I told you there is an easier way: [Running Docker Containers on AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html).
+In this post, I'll show you how leveraging Lambda for Docker containers can simplify deployment and enhance dependency management, similar to Lambda's use of layers in CI/CD workflows.
 
 <Image
   src="/images/awsdocker.jpg"
@@ -20,10 +18,6 @@ Well... what if I told you there is an easier way: [Running Docker Containers on
   priority
   className="next-image"
 />
-
-So let's say you decide to use lambda to run your Docker containers, you may want to develop multiple apps using the same programming language and the same shared code libraries. As the apps grow, your CI/CD (Continuous Integration/Continuous Deployment) process will require packaging the same dependencies over and over, leading to extended deployment times.
-
-Regular Lambda functions have a solution for this issue in the form of layers, So, what if you could implement a similar concept with your Docker images on Lambda? The good news is you can, let me show you how.
 
 ## Project Setup
 
