@@ -51,7 +51,7 @@ Names like Multiplay, i3D.net, Edge Gap, Hathora, and Amazon GameLift are notabl
 
 We all appreciate Open Source for its accessibility (no entry fees to get started) and the opportunity to contribute to projects we find interesting or enjoy, often supported by vibrant communities.
 
-In the game development realm, one standout open source tool is particularly noteworthy: Agones. It's not only prominent but also battle-tested. Agones is described as "an open source, batteries-included, multiplayer dedicated game server scaling and orchestration platform that runs on Kubernetes." In this post, I'll demonstrate how you can harness Agones to host your multiplayer game.
+In the game development realm, one standout open source tool is particularly noteworthy: Agones. It's not only popular among the community but also battle-tested. Agones is described as "an open source, batteries-included, multiplayer dedicated game server scaling and orchestration platform that runs on Kubernetes." In this post, I'll demonstrate how you can harness Agones to host your multiplayer game.
 
 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
   <Image
@@ -91,7 +91,7 @@ It is indeed a simple multiplayer game for two players as you can see The focus 
 
 I've forked the project and made a small change: instead of one player serving as the dedicated server, both players now connect to a remote server running on Agones.
 
-You can find the repository here: [https://github.com/andresromerodev/godot-agones-multiplayer](https://github.com/andresromerodev/godot-agones-multiplayer). Feel free to download and run it using Godot!
+You can find the repository here: [github.com/andresromerodev/godot-agones-multiplayer](https://github.com/andresromerodev/godot-agones-multiplayer). Feel free to download and run it using Godot!
 
 <br/>
 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -106,11 +106,11 @@ You can find the repository here: [https://github.com/andresromerodev/godot-agon
 </div>
 <br/>
 
-If you're using a single computer, you'll need to run two game clients simultaneously. To do this, launch the project and navigate to Debug → Run Multiple Instances → Run 2 instances.
+If you're using a single computer, you'll need to run two game clients simultaneously. To do this, launch the project and navigate to `Debug → Run Multiple Instances → Run 2 instances`.
 
-As mentioned, I won't cover the entire gameplay and networking aspects here. If you're interested in learning more about these topics, I recommend watching this video tutorial: [https://www.youtube.com/watch?v=e0JLO_5UgQo](https://www.youtube.com/watch?v=e0JLO_5UgQo). Coding in Godot is often considered easier compared to some other game engines.
+As mentioned, I won't cover the entire gameplay and networking aspects here. If you're interested in learning more about these topics, I recommend watching this video tutorial: [youtube.com/watch/e0JLO_5UgQo](https://youtube.com/watch/e0JLO_5UgQo). Coding in Godot is often considered easier compared to some other game engines.
 
-However, there are three sections of the code related to Agones that I want to explain. When dealing with game server hosting, it's crucial to monitor running instances, their details such as IP and port, their health status, and readiness to accept player connections, among other functionalities. Agones achieves this through an SDK. For this example, we'll use the Agones Community SDK for Godot, which you can find here: [https://github.com/AndreMicheletti/godot-agones-sdk](https://github.com/AndreMicheletti/godot-agones-sdk).
+However, there are three sections of the code related to Agones that I want to explain. When dealing with game server hosting, it's crucial to monitor running instances, their details such as IP and port, their health status, and readiness to accept player connections, among other functionalities. Agones achieves this through an SDK. For this example, we'll use the Agones Community SDK for Godot, which you can find here: [github.com/AndreMicheletti/godot-agones-sdk](https://github.com/AndreMicheletti/godot-agones-sdk).
 
 Setting up the SDK is straightforward, and for our use case, we'll need to call three functions: `start()`, `ready()`, and `health()`.
 
@@ -133,12 +133,16 @@ Once the SDK is initialized and you've completed other initialization steps for 
 func hostGame():
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(server_port, 2)
+
 	if error != OK:
 		print("cannot host: " + error)
 		return
+
 	peer.get_host().compress(ENetConnection.COMPRESS_ZLIB)
 	multiplayer.set_multiplayer_peer(peer)
+
 	AgonesSDK.ready()
+
 	print("Reported game server as ready to Agones...")
 	print("Waiting For Players!")
 ```
@@ -149,10 +153,12 @@ To effectively manage game servers at scale, it's crucial for each instance to r
 
 ```c
 var elapsed_time = 0.0  # Variable to track the elapsed time
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if peer:
 		elapsed_time += delta  # Increment the elapsed time by the time since the last frame
+
 		if elapsed_time >= 60.0:  # Check if 60 seconds have passed
 			AgonesSDK.health()
 			elapsed_time = 0.0
@@ -272,25 +278,36 @@ I've included a Docker image in the repo that uses CentOS as a base image.
 ```docker
 FROM centos:latest
 WORKDIR /etc/yum.repos.d/
+
 # Update repository URLs
 RUN sed -i 's/mirrorlist/#mirrorlist/g' CentOS-* && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' CentOS-*
+
 # Install necessary packages
 RUN dnf install -y curl unzip libXcursor openssl openssl-libs libXinerama libXrandr-devel libXi alsa-lib pulseaudio-libs mesa-libGL && dnf clean all
+
 # Set Godot version as an environment variable
 ENV GODOT_VERSION="4.2.2"
+
 # Download Godot from GitHub
 RUN curl -LO https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+
 # Unzip and move the Godot binary to the appropriate directory
 RUN unzip Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
 RUN mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot
+
 # Make the Godot binary executable
 RUN chmod +x /usr/local/bin/godot
+
 # Clean up the zip file
 RUN rm Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip
+
 # Update system and install ca-certificates
 RUN dnf -y update && dnf -y install ca-certificates && update-ca-trust && dnf clean all
+
 EXPOSE 8910
+
 COPY game.pck .
+
 CMD ["/usr/local/bin/godot", "--headless", "--main-pack", "./game.pck", "--server"]
 ```
 
@@ -304,7 +321,7 @@ docker build --pull --rm -f "dockerfile" -t godotagonesmultiplayer:latest "."
 
 ## Creating a Public Registry and Submitting the Server Image
 
-Now, to use our image, we need to store it somewhere. To keep things simple, we're going to create a public Docker registry. You can sign up for an account on [Docker Hub](https://hub.docker.com/_/registry). I've named my repo `godotagonesmultiplayer`, and you can find it at [https://hub.docker.com/repository/docker/andresromerodev/godotagonesmultiplayer/general](https://hub.docker.com/repository/docker/andresromerodev/godotagonesmultiplayer/general).
+Now, to use our image, we need to store it somewhere. To keep things simple, we're going to create a public Docker registry. You can sign up for an account on [Docker Hub](https://hub.docker.com/_/registry). I've named my repo `godotagonesmultiplayer`, and you can find it at [hub.docker.com/repository/docker/andresromerodev/godotagonesmultiplayer](https://hub.docker.com/repository/docker/andresromerodev/godotagonesmultiplayer/general).
 
 For the purposes of this tutorial, we'll tag the image as "latest" and then upload it to our registry. You can do this by running the command below:
 
@@ -372,6 +389,7 @@ If you're curious, you can check the server logs. You should see two API calls f
 
 ```jsx
 kubectl logs multiplayer-game-server-gg79v -c multiplayer-game-server
+
 Godot Engine v4.2.2.stable.official.15073afe3 - https://godotengine.org
 [AGONES] SDK STARTING UP... PORT FOUND: 9358
 [AGONES] POST /ready
