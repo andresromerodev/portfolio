@@ -7,14 +7,18 @@ export default function Page() {
         {"</>"} Andresromero.dev
       </h1>
       <p className="mb-4">
-        Hey, I'm Andrés! I'm a Software Engineer from Costa Rica.
+        Hey, I'm Andrés, a Software Engineer from Costa Rica.
         <br />
         <br />
-        I currently work at <u>Skymap Games</u> where I'm part of the Server Engineering team co-developing an exciting unannounced AAA game title.
+        I work at <u>Skymap Games</u> where I’m part of the Server Engineering team building the backend for an unannounced AAA game (yes, it’s as cool as it sounds).
         <br />
         <br />
-        From coding to leading, I've got the full stack covered - take a look at my <a href='https://andresromerodev.notion.site/andresromerodev/Andr-s-Romero-1c7e5808a418431b8df0dd4fa63c25ba'target='_blank'><u>Resume</u></a> and let's discuss that idea you have in mind!
-      </p>
+        I’m into clean code, AI, distributed systems, and building things that actually work at scale. From backend logic to full-stack problem-solving, I like turning complex problems into real world solutions.
+        <br />
+        <br />
+        This blog is where I share what I’ve learned, what I’m working on, and sometimes just what I find interesting in tech and games.
+         Take a look around, and if something sparks an idea, let’s connect.
+       </p>
       <hr />
 
       <h2 className="my-8 text-2xl font-semibold tracking-tighter">Blog Posts</h2>
