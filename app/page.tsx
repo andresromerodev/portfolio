@@ -20,7 +20,6 @@ export default function Page() {
         Take a look around, and if something sparks an idea, let’s connect.
        </p>
       <hr />
-
       <h2 className="my-8 text-2xl font-semibold tracking-tighter">Blog Posts</h2>
       <div className="my-8">
         <BlogPosts />
