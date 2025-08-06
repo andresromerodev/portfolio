@@ -10,10 +10,10 @@ export default function Page() {
         Hey, I'm Andrés! a Software Engineer from Costa Rica.
         <br />
         <br />
-        I work at <b>Skymap Games</b> where I’m part of the Engineering team building the backend and infrastructure for a new unannounced AAA game.
+        I work at <b>Skymap Games</b> where I’m part of the Engineering team building the backend and infrastructure for an unannounced AAA game.
         <br />
         <br />
-        I’m into clean code, AI, distributed systems, and building things that actually work at scale. From backend logic to full-stack problem-solving, I like turning complex problems into real world solutions.
+        I’m into clean code, AI, distributed systems, and building things that actually work at scale. From backend to full-stack problem-solving, I like turning complex problems into real world solutions.
         <br />
         <br />
         This blog is where I share what I’ve learned, what I’m working on, and sometimes just what I find interesting in tech and games.
