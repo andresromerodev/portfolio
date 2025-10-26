@@ -1,6 +1,6 @@
 # </> Andresromero.dev
 
-This is a porfolio site with a blog. Includes:
+My porfolio site and blog. Includes:
 
 - MDX and Markdown support
 - Optimized for SEO (sitemap, robots, JSON-LD schema)
