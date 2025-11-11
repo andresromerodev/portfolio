@@ -6,7 +6,7 @@ export default function UsesPage() {
         <h2 className="my-4 text-2xl font-semibold tracking-tighter">Hardware</h2>
         <ul className="list-disc ml-8">
           <li className="hover:text-gray-600 mb-2">
-            <a href="https://www.dell.com/en-us/shop/dell-laptops/xps-15-laptop/spd/xps-15-9520-laptop/ctox15w11p1c4002" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.dell.com/en-us/shop/dell-laptops/scr/laptops/appref=xps-product-line" target="_blank" rel="noopener noreferrer">
               Dell XPS 15 (i7, 64GB DDR5 RAM, 3TB SSD, RTX 3050)
             </a>
           </li>
@@ -16,19 +16,19 @@ export default function UsesPage() {
             </a>
           </li>
           <li className="hover:text-gray-600 mb-2">
-            <a href="https://www.amazon.com/Apple-Generation-Lightning-Resistant-Headphones/dp/B0BDHB9Y8H/ref=sr_1_1_sspa?keywords=airpods&s=electronics&sr=1-1-spons&ufe=app_do%3Aamzn1.fos.f5122f16-c3e8-4386-bf32-63e904010ad0&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyTjhDREJNTlNRUUlVJmVuY3J5cHRlZElkPUEwNjUyNjUwWFhKWlNLMkZJTlpJJmVuY3J5cHRlZEFkSWQ9QTAxMDQwMTMyRTZMNkRBOEc2Q0pWJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ=="
+            <a href="https://www.apple.com/airpods-max/"
               target="_blank" rel="noopener noreferrer">
-              3rd Generation Apple Airpods
+              Apple Airpods Max
             </a>
           </li>
           <li className="hover:text-gray-600 mb-2">
-            <a href="https://www.amazon.com/gp/product/B09J53TB27/ref=ppx_yo_dt_b_search_asin_image?ie=UTF8&psc=1" target="_blank" rel="noopener noreferrer">
-              Anker PowerCast M300 Microphone
+            <a href="https://www.amazon.com/dp/B0C74GYW3J" target="_blank" rel="noopener noreferrer">
+              FIFINE XLR/USB Gaming Microphon
             </a>
           </li>
           <li className="hover:text-gray-600 mb-2">
-            <a href="https://www.amazon.com/gp/product/B08BNJPVXG/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1" target="_blank" rel="noopener noreferrer">
-              Logitech C505 HD Webcam (720p)
+            <a href="https://www.amazon.com/dp/B01N5UOYC4" target="_blank" rel="noopener noreferrer">
+              Logitech Brio 4K Webcam
             </a>
           </li>
           <li className="hover:text-gray-600 mb-2">
@@ -37,7 +37,7 @@ export default function UsesPage() {
             </a>
           </li>
           <li className="hover:text-gray-600 mb-2">
-            <a href="https://www.amazon.com/gp/product/B09HMKFDXC/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.amazon.com/gp/product/B09HMKFDXC" target="_blank" rel="noopener noreferrer">
               Logitech MX Master 3S Wireless Mouse
             </a>
           </li>
@@ -47,7 +47,7 @@ export default function UsesPage() {
         <h2 className="my-4 text-2xl font-semibold tracking-tighter">Software</h2>
         <ul className="list-disc ml-8">
           <li className="mb-2">
-            I use <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 font-medium">VS Code</a> for coding in JavaScript, Python, Go, and Terraform.
+            I use <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 font-medium">VS Code (Copilot + Claude Sonnet 4)</a> for coding in TypeScript, Python, Go, and Terraform.
           </li>
           <li className="mb-2">
             The <a href="https://github.com/microsoft/terminal" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 font-medium">Windows Terminal</a> is my preferred terminal for its integration with WSL.
@@ -56,7 +56,7 @@ export default function UsesPage() {
             When it comes to managing my TODOs and project notes, I rely on <a href="https://www.notion.so" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 font-medium">Notion</a>.
           </li>
           <li className="mb-2">
-            I use <a href="https://brave.com/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 font-medium">Brave</a> as my main browser for its ad-blocking capabilities.
+            I use <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 font-medium">Chrome</a> as my main browser.
           </li>
           <li className="mb-2">
             And for API testing, I use <a href="https://www.postman.com/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600 font-medium">Postman</a> for REST, GraphQL, and gRPC.
