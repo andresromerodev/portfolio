@@ -25,7 +25,7 @@ However, in game development, these terms have distinct meanings. The backend se
 </div>
 <br/>
 
-When you begin developing a new multiplayer game as a backend engineer, you're often responsible for orchestrating these dedicated servers. Services like matchmaking rely on interacting with these servers to host game matches. Essentially, these dedicated servers are headless processes written in either the same engine as the gameplay side of the game or in a separate language like Go or Node.js. These servers are designed to handle multiple concurrent player connections efficiently.
+When you begin developing a new multiplayer game as a backend engineer, you're often responsible for orchestrating these dedicated servers. Services like matchmaking rely on interacting with these servers to host game matches. Essentially, these dedicated servers are headless processes written either in the same engine as the gameplay side of the game or in a separate language like Go or Node.js. These servers are designed to handle multiple concurrent player connections efficiently.
 
 But more challenging than understanding the concept is putting it into practice. How can you learn all of this? That's precisely what I aim to cover in this post, keeping it as beginner-friendly as possible for you.
 
@@ -35,19 +35,19 @@ When you Google game server hosting solutions, you'll come across companies that
 
 <b>Build Your Own Orchestrator</b>
 
-Some game studios opt to create their own game server orchestrator using either their own hardware with cloud management software like OpenStack or leveraging base compute services from major cloud providers such as EC2 in AWS or GCE in Google Cloud. This orchestrator acts as middleware responsible for allocating compute resources (CPU and memory) to scale either vertically or horizontally to manage the game server fleet.
+Some game studios opt to create their own game server orchestrator using either their own hardware with cloud management software like OpenStack or base compute services from major cloud providers, such as EC2 in AWS or GCE in Google Cloud. This orchestrator acts as middleware responsible for allocating compute resources (CPU and memory) to scale either vertically or horizontally to manage the game server fleet.
 
 This approach is commonly seen with AAA games, a term informally used to classify video games with higher development and marketing budgets compared to other tiers of games.
 
-<b>Use a Third Party Service</b>
+<b>Use a Third-Party Service</b>
 
-The approach that felt most familiar to me, coming from the web industry where you typically pay for dedicated compute power either on-demand or upfront and receive a fully managed service in return, also applies in the game industry for game server hosting.
+The approach that felt most familiar to me, coming from the web industry where you typically pay for dedicated compute power either on demand or upfront and receive a fully managed service in return, also applies in the game industry for game server hosting.
 
 There are several options available where you can easily run your game servers. By interacting with an API, you can upload your game server builds, allocate resources, and spin up game server instances as needed. Additionally, these services provide an admin dashboard that allows you to manage everything through a user-friendly interface.
 
-Names like Multiplay, i3D.net, Edge Gap, Hathora, and Amazon GameLift are notable in this space. While my experience primarily relates to these services, I won't delve into specific recommendations in this post. But I encourage you to explore them yourself, as each offers different levels of optimization, pricing, scalability, and developer experience.
+Names like Multiplay, i3D.net, Edgegap, Hathora, and Amazon GameLift are notable in this space. While my experience primarily relates to these services, I won't delve into specific recommendations in this post. But I encourage you to explore them yourself, as each offers different levels of optimization, pricing, scalability, and developer experience.
 
-<b>Pickup an Open Source Alternative (This Tutorial)</b>
+<b>Pick Up an Open Source Alternative (This Tutorial)</b>
 
 We all appreciate Open Source for its accessibility (no entry fees to get started) and the opportunity to contribute to projects we find interesting or enjoy, often supported by vibrant communities.
 
@@ -87,7 +87,7 @@ Now, let's dive in! Before we can use Agones to run our game, we need a game to 
 </div>
 <br/>
 
-It is indeed a simple multiplayer game for two players as you can see The focus here is on hosting, so we won't go into much detail about gameplay. Once connected, each player can control one character and fire their gun, with actions synchronized across both players' screens.
+It is indeed a simple multiplayer game for two players, as you can see. The focus here is on hosting, so we won't go into much detail about gameplay. Once connected, each player can control one character and fire their gun, with actions synchronized across both players' screens.
 
 I've forked the project and made a small change: instead of one player serving as the dedicated server, both players now connect to a remote server running on Agones.
 
@@ -108,7 +108,7 @@ You can find the repository here: [github.com/andresromerodev/godot-agones-multi
 
 If you're using a single computer, you'll need to run two game clients simultaneously. To do this, launch the project and navigate to `Debug → Run Multiple Instances → Run 2 instances`.
 
-As mentioned, I won't cover the entire gameplay and networking aspects here. If you're interested in learning more about these topics, I recommend watching this video tutorial: [youtube.com/watch/e0JLO_5UgQo](https://youtube.com/watch/e0JLO_5UgQo). Coding in Godot is often considered easier compared to some other game engines.
+As mentioned, I won't cover the entire gameplay and networking aspects here. If you're interested in learning more about these topics, I recommend watching this video tutorial: [youtube.com/watch/e0JLO_5UgQo](https://youtube.com/watch/e0JLO_5UgQo). Coding in Godot is often considered easier than in some other game engines.
 
 However, there are three sections of the code related to Agones that I want to explain. When dealing with game server hosting, it's crucial to monitor running instances, their details such as IP and port, their health status, and readiness to accept player connections, among other functionalities. Agones achieves this through an SDK. For this example, we'll use the Agones Community SDK for Godot, which you can find here: [github.com/AndreMicheletti/godot-agones-sdk](https://github.com/AndreMicheletti/godot-agones-sdk).
 
@@ -168,11 +168,11 @@ Great! Now let's delve into Agones and Kubernetes!
 
 ## Running Agones
 
-As I’m aiming to keep this post as simple as possible, I’m going to choose Digital Ocean as our infrastructure provider. They offer a fully managed Kubernetes service, which makes it straightforward to spin up new clusters and nodes.
+As I’m aiming to keep this post as simple as possible, I’m going to choose DigitalOcean as our infrastructure provider. They offer a fully managed Kubernetes service, which makes it straightforward to spin up new clusters and nodes.
 
 Before we dive deeper, if you’re new to Kubernetes, I recommend reading [this guide](https://www.cncf.io/phippy/the-childrens-illustrated-guide-to-kubernetes/). It explains Kubernetes in a simple manner and should give you a basic understanding of what we'll be doing.
 
-So, let’s set up a cluster in Digital Ocean. Feel free to sign up; they provide $200 in entry credit for new members, which should be sufficient for our tests.
+So, let’s set up a cluster in DigitalOcean. Feel free to sign up; they provide $200 in entry credit for new members, which should be sufficient for our tests.
 
 1. Navigate to the Kubernetes section and click on “Create.” You’ll be prompted to enter various configurations for your cluster. Most defaults should work fine, but ensure your instance is configured with at least 4GB of RAM and 2 vCPUs. For this example, one node should suffice.
 
@@ -190,7 +190,7 @@ So, let’s set up a cluster in Digital Ocean. Feel free to sign up; they provid
 </div>
 <br/>
 
-2. Once your cluster is fully provisioned, it will take between 2 to 4 minutes to start. Once it's ready, you'll see it running and available for use.
+2. Once your cluster is fully provisioned, it will take between 2 and 4 minutes to start. Once it's ready, you'll see it running and available for use.
 
 <br/>
 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -205,7 +205,7 @@ So, let’s set up a cluster in Digital Ocean. Feel free to sign up; they provid
 </div>
 <br/>
 
-3. Click on "Actions" ➜ "Download Config" in your Digital Ocean Kubernetes dashboard. Name the downloaded file whatever you prefer (e.g., `digital-ocean.yaml`) and save it in a folder that you'll remember for future reference.
+3. Click on "Actions" ➜ "Download Config" in your DigitalOcean Kubernetes dashboard. Name the downloaded file whatever you prefer (e.g., `digital-ocean.yaml`) and save it in a folder that you'll remember for future reference.
 
 4. Open a terminal and set the `KUBECONFIG` environment variable to point to the path where you downloaded the kubeconfig file.
 
@@ -252,8 +252,8 @@ agones-system   agones-ping-7786b574cd-68q6c         1/1     Running   0        
 ```
 <br/>
 
-8. Last but not least, you need to open the cluster firewall in Digital Ocean to allow UDP connections to your game servers. 
-To do that, go to Networking → Firewalls → Select the appropriate non-public firewall. You should see an “Inbound Rules” section; add a new “All UDP” rule and ensure it allows all IPv4 and IPv6 clients. This allows players from around the world to connect to your servers if necessary.
+8. Last but not least, you need to open the cluster firewall in DigitalOcean to allow UDP connections to your game servers. 
+To do that, go to Networking → Firewalls and select the appropriate non-public firewall. You should see an “Inbound Rules” section; add a new “All UDP” rule and ensure it allows all IPv4 and IPv6 clients. This allows players from around the world to connect to your servers if necessary.
 
 <br/>
 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -267,7 +267,7 @@ To do that, go to Networking → Firewalls → Select the appropriate non-public
   />
 </div>
 
-And that should be all; our cluster is fully set up and running Agones. Wasn’t that difficult, right?
+And that should be all; our cluster is fully set up and running Agones. That wasn’t difficult, right?
 
 ## Building the Game Server
 
@@ -311,9 +311,9 @@ COPY game.pck .
 CMD ["/usr/local/bin/godot", "--headless", "--main-pack", "./game.pck", "--server"]
 ```
 
-It installs Godot and runs a `game.pckc`; this file is the dedicated game server. I'm including the `.pckc` in the repo. I admit that the Docker file could be improved so that the `.pckc` is generated as part of the Docker build process, eliminating the need for manual action. However, if you want to make modifications to the project, feel free to modify the code and rebuild the dedicated server from `Godot → Project → Export → Linux → Export PCK/ZIP`.
+It installs Godot and runs a `game.pck`; this file is the dedicated game server. I'm including the `.pck` in the repo. I admit that the Dockerfile could be improved so that the `.pck` is generated as part of the Docker build process, eliminating the need for manual action. However, if you want to make modifications to the project, feel free to modify the code and rebuild the dedicated server from `Godot → Project → Export → Linux → Export PCK/ZIP`.
 
-Once you have the updated `.pckc`, you can build the Docker image with:
+Once you have the updated `.pck`, you can build the Docker image with:
 
 ```jsx
 docker build --pull --rm -f "dockerfile" -t godotagonesmultiplayer:latest "." 
@@ -331,7 +331,7 @@ docker image push docker.io/YOURUSERNAME/godotagonesmultiplayer:latest
 
 ## How to Start a Game Server
 
-At this point, you should have the main two pieces: 1) Agones and 2) an image for your game server. Now, we need to instruct Agones on how to run the game server image. For this, we are going to create a Kubernetes manifest file. I've named mine `gameserver.yaml`. This manifest file tells Agones how the game server should run, specifying details such as CPU, memory, ports, and even rules for health checking.
+At this point, you should have the two main pieces: 1) Agones and 2) an image for your game server. Now, we need to instruct Agones on how to run the game server image. For this, we are going to create a Kubernetes manifest file. I've named mine `gameserver.yaml`. This manifest file tells Agones how the game server should run, specifying details such as CPU, memory, ports, and even rules for health checking.
 
 ```jsx
 apiVersion: agones.dev/v1
@@ -362,14 +362,14 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              cpu: "1"       # Request up to 1 CPU core1
+              cpu: "1"       # Request up to 1 CPU core
               memory: "1Gi"  # Request up to 1 GB memory
             limits:
               cpu: "4"       # Limit to 4 CPU cores
               memory: "8Gi"  # Limit to 8 GB memory
 ```
 
-These are just some of the things you can configure. For more advanced use cases, I recommend checking out the Agones official docs at [https://agones.dev/site](https://agones.dev/site/). The goal of this tutorial is to help you deploy your first game server without delving too deep into Agones' advanced concepts, but I encourage you to learn more as you complete this tutorial.
+These are just some of the things you can configure. For more advanced use cases, I recommend checking out the official Agones docs at [https://agones.dev/site](https://agones.dev/site/). The goal of this tutorial is to help you deploy your first game server without delving too deeply into Agones' advanced concepts, but I encourage you to learn more as you complete this tutorial.
 
 Now, let's run a game server. Open the terminal and run:
 
@@ -401,7 +401,7 @@ Waiting For Players!
 
 ## Time to Play! Connecting to the Server
 
-Finally, let’s connect and play! If you haven't already, you run 2 instances of the game using Godot. Alternatively, you can generate a client build for Windows, Mac, or Linux using the same Export process we used for the game server. Once the clients are launched, you'll want to enter the IP and Port displayed after running `kubectl get gameservers`.
+Finally, let’s connect and play! If you haven't already, run 2 instances of the game using Godot. Alternatively, you can generate a client build for Windows, Mac, or Linux using the same Export process we used for the game server. Once the clients are launched, you'll want to enter the IP and port displayed after running `kubectl get gameservers`.
 
 <br/>
 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -440,10 +440,10 @@ Now, pick one of the two clients as the leader and click on 'Start Game,' and vo
 <br/>
 
 
-Not the best game I know, and you probably noticed there is no win condition other than falling off the platform, lol. But the idea is to help you understand the concepts around dedicated game servers rather than focusing on gameplay.
+Not the best game, I know, and you probably noticed there is no win condition other than falling off the platform, lol. But the idea is to help you understand the concepts around dedicated game servers rather than focusing on gameplay.
 
 ## Closing Comments
 
-I know Kubernetes can be a challenging topic, especially for beginners. It might have caused you a headache, or maybe you've become even more curious and want to keep learning! Either way, feel free to reach out with questions, I'm just one ping away from you on LinkedIn or Twitter (X), and all DMs are welcome! I hope you enjoyed it.
+I know Kubernetes can be a challenging topic, especially for beginners. It might have caused you a headache, or maybe you've become even more curious and want to keep learning! Either way, feel free to reach out with questions. I'm just one ping away from you on LinkedIn or Twitter (X), and all DMs are welcome! I hope you enjoyed it.
 
 Thanks for reading!
