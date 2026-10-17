@@ -103,6 +103,9 @@ export function CustomMDX(props) {
   return (
     <MDXRemote
       {...props}
+      // Posts are first-party files in this repo, so keep JSX attribute
+      // expressions like width={400}; eval, require etc. stay blocked
+      options={{ blockJS: false, ...props.options }}
       components={{ ...components, ...(props.components || {}) }}
     />
   )
