@@ -9,7 +9,7 @@ export default function UsesPage() {
       <h1 className="mb-8 text-3xl font-semibold tracking-tighter sm:text-4xl">What I Use Every Day</h1>
       <div className="mb-12">
         <h2 className="mb-4 text-xl/[1.3] font-medium tracking-tight">Hardware</h2>
-        <ul className="list-disc pl-6 space-y-1.5 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
+        <ul className="enter-list list-disc pl-6 space-y-1.5 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
           <li className="pl-1">
             <a className="link" href="https://www.dell.com/en-us/shop/dell-laptops/scr/laptops/appref=xps-product-line" target="_blank" rel="noopener noreferrer">
               Dell XPS 15 (i7, 64GB DDR5 RAM, 3TB SSD, RTX 3050)
@@ -50,7 +50,7 @@ export default function UsesPage() {
       </div>
       <div>
         <h2 className="mb-4 text-xl/[1.3] font-medium tracking-tight">Software</h2>
-        <ul className="list-disc pl-6 space-y-1.5 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
+        <ul className="enter-list list-disc pl-6 space-y-1.5 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
           <li className="pl-1">
             I use <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer" className="link">VS Code (Copilot + Claude Sonnet 4)</a> for coding in TypeScript, Python, Go, and Terraform.
           </li>
