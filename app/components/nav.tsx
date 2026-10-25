@@ -40,7 +40,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <aside className="mb-16 tracking-tight">
+    <aside className="enter mb-16 tracking-tight">
       <nav className="-ml-2 flex flex-row gap-2" id="nav">
         {Object.entries(navItems).map(([path, { name }]) => {
           let external = path.startsWith('http')

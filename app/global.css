@@ -329,31 +329,36 @@ table {
     scroll-behavior: smooth;
   }
 
-  .stagger > *,
+  :is(.stagger, .enter-list) > *,
   .enter {
     /* backwards, not both: once finished, no transform lingers on the element */
     animation: enter 600ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
     animation-delay: var(--enter-delay, 0ms);
   }
 
-  .stagger > :nth-child(2) {
+  :is(.stagger, .enter-list) > :nth-child(2) {
     --enter-delay: 60ms;
   }
 
-  .stagger > :nth-child(3) {
+  :is(.stagger, .enter-list) > :nth-child(3) {
     --enter-delay: 120ms;
   }
 
-  .stagger > :nth-child(4) {
+  :is(.stagger, .enter-list) > :nth-child(4) {
     --enter-delay: 180ms;
   }
 
-  .stagger > :nth-child(n + 5) {
+  :is(.stagger, .enter-list) > :nth-child(n + 5) {
+    --enter-delay: 240ms;
+  }
+
+  /* Long lists step in faster so the last row never waits on the first */
+  .enter-list > :nth-child(n + 5) {
     --enter-delay: 240ms;
   }
 
   /* Client-side navigations: one quick fade, no cascade (Navbar sets the attribute) */
-  html[data-entered] :is(.stagger > *, .enter) {
+  html[data-entered] :is(.stagger > *, .enter-list > *, .enter) {
     animation-duration: 240ms;
     animation-delay: 0ms;
   }
