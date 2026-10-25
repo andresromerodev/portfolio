@@ -8,20 +8,27 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
 import { baseUrl } from './sitemap'
 
+const description = 'Andrés Romero, software engineer from Costa Rica.'
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: 'Andresromero.dev',
-    template: '%s | Andresromero.dev',
+    template: '%s · Andresromero.dev',
   },
-  description: 'Andres Romero, Costarican Software Engineer.',
+  description,
   openGraph: {
     title: 'Andresromero.dev',
-    description: 'Andres Romero, Costarican Software Engineer.',
+    description,
     url: baseUrl,
     siteName: 'Andresromero.dev',
     locale: 'en_US',
     type: 'website',
+    images: [{ url: '/og', width: 1200, height: 630, alt: 'Andrés Romero' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@andresromerodev',
   },
   robots: {
     index: true,
@@ -37,6 +44,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
+  colorScheme: 'light dark',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
     { media: '(prefers-color-scheme: dark)', color: '#000000' },
@@ -54,13 +62,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
+        'text-neutral-900 bg-white dark:text-neutral-100 dark:bg-black',
         GeistSans.variable,
         GeistMono.variable
       )}
     >
-      <body className="antialiased px-6 mt-8">
-        <main className="flex-auto min-w-0 max-w-xl mx-auto mt-6 flex flex-col">
+      <body className="antialiased px-6 mt-8 sm:mt-12">
+        <main className="min-w-0 max-w-xl mx-auto flex flex-col">
           <Navbar />
           {children}
           <Footer />

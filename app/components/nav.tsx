@@ -1,7 +1,9 @@
 'use client'
 
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ArrowIcon } from './arrow-icon'
 
 const navItems = {
   '/': {
@@ -10,11 +12,11 @@ const navItems = {
   '/uses': {
     name: 'Uses',
   },
-  'https://andresromerodev.notion.site/Andr-s-Romero-1c7e5808a418431b8df0dd4fa63c25ba': {
-    name: 'Resume',
-  },
   '/blog': {
     name: 'Blog',
+  },
+  'https://andresromerodev.notion.site/Andr-s-Romero-1c7e5808a418431b8df0dd4fa63c25ba': {
+    name: 'Resume',
   },
 }
 
@@ -29,6 +31,13 @@ function isActive(pathname: string, path: string) {
 
 export function Navbar() {
   let pathname = usePathname()
+
+  useEffect(() => {
+    // Once the first page has played in, client-side navigations get a short,
+    // unstaggered fade instead (see global.css). Must outlast the footer's 300ms + 600ms.
+    let timer = setTimeout(() => document.documentElement.setAttribute('data-entered', ''), 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <aside className="mb-16 tracking-tight">
@@ -45,13 +54,24 @@ export function Navbar() {
               target={external ? '_blank' : undefined}
               rel={external ? 'noopener noreferrer' : undefined}
               className={cx(
-                'px-2 py-1 transition-colors duration-200',
+                'px-2 py-1',
+                external && 'group inline-flex items-center gap-[3px]',
+                // Only inactive links ease, so the new active link snaps on navigation
                 active
                   ? 'text-neutral-900 dark:text-neutral-100'
-                  : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100'
+                  : 'text-neutral-500 transition-colors duration-200 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100'
               )}
             >
               {name}
+              {external && (
+                <>
+                  <ArrowIcon
+                    size={8}
+                    className="-translate-y-px transition-transform duration-200 group-hover:-translate-y-[2px] group-hover:translate-x-px"
+                  />
+                  <span className="sr-only"> (opens in new tab)</span>
+                </>
+              )}
             </Link>
           )
         })}
