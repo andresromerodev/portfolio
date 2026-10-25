@@ -1,10 +1,15 @@
+export const metadata = {
+  title: 'Uses',
+  description: 'The hardware and software Andrés Romero uses every day.',
+}
+
 export default function UsesPage() {
   return (
     <section className="stagger">
-      <h1 className="mb-8 text-3xl font-semibold tracking-tighter sm:text-4xl">What I use every day</h1>
-      <div className="mb-10">
-        <h2 className="mb-4 text-2xl font-semibold tracking-tighter">Hardware</h2>
-        <ul className="list-disc pl-5 space-y-2 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
+      <h1 className="mb-8 text-3xl font-semibold tracking-tighter sm:text-4xl">What I Use Every Day</h1>
+      <div className="mb-12">
+        <h2 className="mb-4 text-xl/[1.3] font-medium tracking-tight">Hardware</h2>
+        <ul className="list-disc pl-6 space-y-1.5 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
           <li className="pl-1">
             <a className="link" href="https://www.dell.com/en-us/shop/dell-laptops/scr/laptops/appref=xps-product-line" target="_blank" rel="noopener noreferrer">
               Dell XPS 15 (i7, 64GB DDR5 RAM, 3TB SSD, RTX 3050)
@@ -44,8 +49,8 @@ export default function UsesPage() {
         </ul>
       </div>
       <div>
-        <h2 className="mb-4 text-2xl font-semibold tracking-tighter">Software</h2>
-        <ul className="list-disc pl-5 space-y-2 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
+        <h2 className="mb-4 text-xl/[1.3] font-medium tracking-tight">Software</h2>
+        <ul className="list-disc pl-6 space-y-1.5 leading-7 text-neutral-800 dark:text-neutral-200 marker:text-neutral-400 dark:marker:text-neutral-600">
           <li className="pl-1">
             I use <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer" className="link">VS Code (Copilot + Claude Sonnet 4)</a> for coding in TypeScript, Python, Go, and Terraform.
           </li>

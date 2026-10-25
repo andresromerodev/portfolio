@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
@@ -36,16 +37,19 @@ export function generateMetadata({ params }) {
       type: 'article',
       publishedTime,
       url: `${baseUrl}/blog/${post.slug}`,
+      siteName: 'Andresromero.dev',
+      locale: 'en_US',
       images: [
-        {
-          url: ogImage,
-        },
+        image
+          ? { url: ogImage }
+          : { url: ogImage, width: 1200, height: 630, alt: title },
       ],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      creator: '@andresromerodev',
       images: [ogImage],
     },
   }
@@ -60,6 +64,32 @@ export default function Blog({ params }) {
 
   return (
     <section className="stagger">
+      <h1 className="text-2xl/[1.2] font-semibold tracking-tighter sm:text-3xl/[1.2]">
+        {post.metadata.title}
+      </h1>
+      <p className="mt-3 mb-10 text-sm text-neutral-500 dark:text-neutral-400">
+        <time dateTime={post.metadata.publishedAt}>
+          {formatDate(post.metadata.publishedAt)}
+        </time>
+      </p>
+      <article className="prose">
+        <CustomMDX source={post.content} />
+      </article>
+      <p className="mt-12 text-sm">
+        <Link
+          href="/blog"
+          className="group -m-1 inline-flex items-center gap-2 p-1 text-neutral-500 transition-colors duration-200 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+        >
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover:-translate-x-px group-focus-visible:-translate-x-px"
+          >
+            ←
+          </span>
+          All posts
+        </Link>
+      </p>
+      {/* Last child, so it doesn't take a slot in the stagger */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -71,28 +101,19 @@ export default function Blog({ params }) {
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
             description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+            image: `${baseUrl}${
+              post.metadata.image ??
+              `/og?title=${encodeURIComponent(post.metadata.title)}`
+            }`,
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
               '@type': 'Person',
-              name: 'My Portfolio',
+              name: 'Andrés Romero',
+              url: baseUrl,
             },
           }),
         }}
       />
-      <h1 className="font-semibold text-2xl tracking-tighter sm:text-3xl">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-3 mb-8 text-sm">
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 tabular-nums">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
     </section>
   )
 }

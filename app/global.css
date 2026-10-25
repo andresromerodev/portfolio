@@ -14,37 +14,41 @@
   color: #fefefe;
 }
 
+/* Code stays in the site's neutral ink; only comments step back */
 :root {
-  --sh-class: #2d5e9d;
-  --sh-identifier: #354150;
-  --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #e02518;
-  --sh-comment: #a19595;
-  --sh-jsxliterals: #6266d1;
-  --sh-property: #e25a1c;
-  --sh-entity: #e25a1c;
+  --sh-class: #171717;
+  --sh-identifier: #262626;
+  --sh-sign: #737373;
+  --sh-string: #525252;
+  --sh-keyword: #0a0a0a;
+  --sh-comment: #737373;
+  --sh-jsxliterals: #262626;
+  --sh-property: #404040;
+  --sh-entity: #404040;
   /* Selection blue, darkened just enough for 3:1 contrast on white */
   --focus-ring: #3b96e8;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --sh-class: #4c97f8;
-    --sh-identifier: white;
-    --sh-keyword: #f47067;
-    --sh-string: #0fa295;
+    --sh-class: #f5f5f5;
+    --sh-identifier: #e5e5e5;
+    --sh-sign: #a3a3a3;
+    --sh-string: #d4d4d4;
+    --sh-keyword: #fafafa;
+    --sh-comment: #a3a3a3;
+    --sh-jsxliterals: #e5e5e5;
+    --sh-property: #d4d4d4;
+    --sh-entity: #d4d4d4;
     --focus-ring: #47a3f3;
-  }
-  html {
-    color-scheme: dark;
   }
 }
 
 html {
-  min-width: 360px;
-  /* Stop the centered column from jumping when a page gains a scrollbar */
-  scrollbar-gutter: stable;
+  color-scheme: light dark;
+  /* Reserve the scrollbar gutter on both sides: no jump when a page gains a
+     scrollbar, and the column stays exactly centered */
+  scrollbar-gutter: stable both-edges;
 }
 
 :focus-visible {
@@ -79,37 +83,57 @@ li {
   text-underline-offset: 3px;
 }
 
+/* Long URLs and identifiers wrap instead of pushing the page sideways */
+.prose {
+  overflow-wrap: break-word;
+}
+
+.prose :is(h1, h2, h3, h4)[id] {
+  position: relative;
+  scroll-margin-top: 2rem;
+}
+
+/* "#" permalink sits in the left gutter and fades in on heading hover */
 .prose .anchor {
-  @apply absolute invisible no-underline;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  width: 80%;
-  max-width: 700px;
-  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-right: 0.375em;
+  padding-inline: 0.125em;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.anchor:hover {
-  @apply visible;
-}
-
-.prose .anchor:after {
-  @apply text-neutral-300 dark:text-neutral-700;
+.prose .anchor::after {
+  @apply text-neutral-400 dark:text-neutral-600;
   content: '#';
+  transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.prose *:hover > .anchor {
-  @apply visible;
+.prose :is(h1, h2, h3, h4):hover > .anchor {
+  opacity: 1;
+}
+
+.prose .anchor:hover::after {
+  @apply text-neutral-900 dark:text-neutral-100;
+}
+
+/* Touch screens have no hover: no invisible tap target on headings */
+@media (hover: none) {
+  .prose .anchor {
+    display: none;
+  }
 }
 
 .prose pre {
-  @apply bg-neutral-50 dark:bg-neutral-900 rounded-xl overflow-x-auto border border-neutral-200 dark:border-neutral-800 py-3.5 px-4 my-6;
+  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 rounded-xl overflow-x-auto border border-neutral-200 dark:border-neutral-800 py-3.5 px-4 my-6;
   font-size: 13px;
   line-height: 1.7;
 }
 
 .prose code {
-  @apply rounded-md border border-neutral-200 bg-neutral-50 px-1.5 py-0.5 dark:border-neutral-800 dark:bg-neutral-900;
+  @apply rounded-md border border-neutral-200 bg-neutral-50 px-1.5 py-0.5 dark:border-neutral-800 dark:bg-neutral-950;
   font-size: 0.875em;
   /* Show code exactly as typed: no != → ≠ style ligatures */
   font-variant-ligatures: none;
@@ -124,15 +148,60 @@ li {
   line-height: inherit;
 }
 
-.prose code span {
-  @apply font-medium;
+/* Overflowing code shows a quiet pill scrollbar instead of clipping silently */
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: transparent;
+  /* Keep the thumb clear of the rounded corners */
+  margin-inline: 12px;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background-color: rgb(0 0 0 / 0.12);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 9999px;
+}
+
+.prose pre:hover::-webkit-scrollbar-thumb {
+  background-color: rgb(0 0 0 / 0.24);
+}
+
+@media (prefers-color-scheme: dark) {
+  .prose pre::-webkit-scrollbar-thumb {
+    background-color: rgb(255 255 255 / 0.14);
+  }
+
+  .prose pre:hover::-webkit-scrollbar-thumb {
+    background-color: rgb(255 255 255 / 0.28);
+  }
+}
+
+/* Firefox has no ::-webkit-scrollbar. Chrome 121+ drops the styling above
+   when scrollbar-* is set, so only set it where the pseudo-element is missing */
+@supports not selector(::-webkit-scrollbar) {
+  .prose pre {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(0 0 0 / 0.15) transparent;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .prose pre {
+      scrollbar-color: rgb(255 255 255 / 0.18) transparent;
+    }
+  }
 }
 
 .prose img {
-  /* Don't apply styles to next/image */
-  @apply m-0 rounded-xl;
-  /* Hairline edge so white screenshots don't bleed into the page */
-  outline: 1px solid rgb(0 0 0 / 0.08);
+  /* Every figure gets the same 32px rhythm; narrow art is centered */
+  @apply rounded-xl;
+  margin-block: 2rem;
+  margin-inline: auto;
+  /* Hairline edge, the same neutral-200 as every other border on white */
+  outline: 1px solid rgb(0 0 0 / 0.1);
   outline-offset: -1px;
 }
 
@@ -143,13 +212,15 @@ li {
 
 @media (prefers-color-scheme: dark) {
   .prose img {
-    outline-color: rgb(255 255 255 / 0.1);
+    /* neutral-800 hairline; peak white lands near body copy, not a glaring #fff */
+    outline-color: rgb(255 255 255 / 0.15);
+    filter: brightness(0.9);
   }
 
   /* Dark artwork on a transparent or light background: flip it, keep hues */
   .prose img.invert-on-dark {
-    filter: invert(1) hue-rotate(180deg);
-    outline-color: rgb(0 0 0 / 0.1);
+    filter: invert(1) hue-rotate(180deg) brightness(0.9);
+    outline-color: rgb(0 0 0 / 0.15);
   }
 }
 
@@ -163,10 +234,11 @@ li {
 
 .prose h2 {
   @apply text-xl font-medium tracking-tight mt-12 mb-4;
+  line-height: 1.3;
 }
 
 .prose h3 {
-  @apply text-lg font-medium tracking-tight mt-8 mb-3;
+  @apply text-base font-semibold tracking-tight mt-8 mb-3;
 }
 
 .prose h4 {
@@ -176,10 +248,6 @@ li {
 /* Keep each heading closer to the content it introduces */
 .prose :is(h2, h3, h4) + * {
   margin-top: 0;
-}
-
-.prose :is(h1, h2, h3, h4)[id] {
-  scroll-margin-top: 2rem;
 }
 
 .prose strong,
@@ -226,23 +294,8 @@ li {
   @apply font-medium text-neutral-900 dark:text-neutral-100;
 }
 
-.prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-  margin-bottom: 1.25em !important;
-}
-
 .prose > :last-child {
   margin-bottom: 0;
-}
-
-pre::-webkit-scrollbar {
-  display: none;
-}
-
-pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
 
 /* Remove Safari input shadow on mobile */
@@ -272,6 +325,10 @@ table {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
   .stagger > *,
   .enter {
     /* backwards, not both: once finished, no transform lingers on the element */
@@ -293,5 +350,11 @@ table {
 
   .stagger > :nth-child(n + 5) {
     --enter-delay: 240ms;
+  }
+
+  /* Client-side navigations: one quick fade, no cascade (Navbar sets the attribute) */
+  html[data-entered] :is(.stagger > *, .enter) {
+    animation-duration: 240ms;
+    animation-delay: 0ms;
   }
 }

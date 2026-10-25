@@ -41,16 +41,46 @@ function CustomLink(props) {
     return <a {...props} />
   }
 
-  return <a target="_blank" rel="noopener noreferrer" {...props} />
+  return (
+    <a target="_blank" rel="noopener noreferrer" {...props}>
+      {props.children}
+      <span className="sr-only"> (opens in new tab)</span>
+    </a>
+  )
 }
 
 function RoundedImage(props) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />
 }
 
-function Code({ children, ...props }) {
-  let codeHTML = highlight(children)
-  return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
+// sugar-high only tokenizes JavaScript; other fences get dimmed # comments only
+const JS_FENCE = /\blanguage-(jsx?|tsx?|javascript|typescript)\b/
+const HASH_FENCE = /\blanguage-(python|py|ya?ml|bash|sh|shell|console|docker(file)?|gdscript|toml)\b/
+
+function escapeHtml(str: string) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+function Code({ children, className = '', ...props }) {
+  if (JS_FENCE.test(className)) {
+    let codeHTML = highlight(children)
+    return <code className={className} dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
+  }
+
+  if (HASH_FENCE.test(className)) {
+    let codeHTML = escapeHtml(children).replace(
+      /(^|[ \t])(#.*)$/gm,
+      '$1<span class="sh__token--comment" style="color: var(--sh-comment)">$2</span>'
+    )
+    return <code className={className} dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
+  }
+
+  // Inline code and unlabeled fences render as plain text
+  return (
+    <code className={className || undefined} {...props}>
+      {children}
+    </code>
+  )
 }
 
 function slugify(str) {
@@ -62,6 +92,7 @@ function slugify(str) {
     .replace(/&/g, '-and-') // Replace & with 'and'
     .replace(/[^\w\-]+/g, '') // Remove all non-word characters except for -
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .replace(/^-+|-+$/g, '') // Trim - from both ends
 }
 
 function createHeading(level) {
@@ -71,10 +102,13 @@ function createHeading(level) {
       `h${level}`,
       { id: slug },
       [
+        // Mouse-only permalink: the heading itself stays the accessible name
         React.createElement('a', {
           href: `#${slug}`,
           key: `link-${slug}`,
           className: 'anchor',
+          'aria-hidden': 'true',
+          tabIndex: -1,
         }),
       ],
       children
