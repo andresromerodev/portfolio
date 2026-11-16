@@ -127,8 +127,8 @@ li {
 }
 
 .prose pre {
-  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 rounded-xl overflow-x-auto border border-neutral-200 dark:border-neutral-800 py-3.5 px-4 my-6;
-  font-size: 13px;
+  @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-800 dark:text-neutral-200 rounded-xl overflow-x-auto border border-neutral-200 dark:border-neutral-800 py-4 px-5 my-8;
+  font-size: 14px;
   line-height: 1.7;
 }
 
@@ -198,7 +198,7 @@ li {
 .prose img {
   /* Every figure gets the same 32px rhythm; narrow art is centered */
   @apply rounded-xl;
-  margin-block: 2rem;
+  margin-block: 2.5rem;
   margin-inline: auto;
   /* Hairline edge, the same neutral-200 as every other border on white */
   outline: 1px solid rgb(0 0 0 / 0.1);
@@ -225,7 +225,7 @@ li {
 }
 
 .prose p {
-  @apply my-5 leading-7 text-neutral-800 dark:text-neutral-200;
+  @apply my-6 text-lg/8 text-neutral-700 dark:text-neutral-300;
 }
 
 .prose h1 {
@@ -233,16 +233,17 @@ li {
 }
 
 .prose h2 {
-  @apply text-xl font-medium tracking-tight mt-12 mb-4;
-  line-height: 1.3;
+  @apply text-3xl font-semibold tracking-tighter mt-20 mb-6 sm:text-4xl;
+  line-height: 1.1;
 }
 
 .prose h3 {
-  @apply text-base font-semibold tracking-tight mt-8 mb-3;
+  @apply text-xl font-semibold tracking-tight mt-12 mb-4 sm:text-2xl;
+  line-height: 1.25;
 }
 
 .prose h4 {
-  @apply text-base font-medium tracking-tight mt-6 mb-2;
+  @apply text-lg font-semibold tracking-tight mt-8 mb-3;
 }
 
 /* Keep each heading closer to the content it introduces */
@@ -264,7 +265,7 @@ li {
 }
 
 .prose li {
-  @apply my-1.5 pl-1 leading-7 text-neutral-800 dark:text-neutral-200;
+  @apply my-2 pl-1 text-lg/8 text-neutral-700 dark:text-neutral-300;
 }
 
 .prose ul > li::marker {
@@ -278,7 +279,7 @@ li {
 }
 
 .prose blockquote {
-  @apply my-6 border-l-2 border-neutral-200 pl-4 dark:border-neutral-800;
+  @apply my-8 border-l-2 border-neutral-900 pl-6 dark:border-neutral-100;
 }
 
 .prose blockquote p {
@@ -287,7 +288,7 @@ li {
 
 .prose th,
 .prose td {
-  @apply border-b border-neutral-200 px-3 py-2 text-left text-sm dark:border-neutral-800;
+  @apply border-b border-neutral-200 px-3 py-2.5 text-left text-base dark:border-neutral-800;
 }
 
 .prose th {
@@ -296,6 +297,15 @@ li {
 
 .prose > :last-child {
   margin-bottom: 0;
+}
+
+/* Uses page: hairline-divided rows instead of bullets */
+.uses-list {
+  @apply border-b border-neutral-200 dark:border-neutral-800;
+}
+
+.uses-list > li {
+  @apply border-t border-neutral-200 py-4 text-lg/8 text-neutral-700 sm:py-5 sm:text-xl/8 dark:border-neutral-800 dark:text-neutral-300;
 }
 
 /* Remove Safari input shadow on mobile */

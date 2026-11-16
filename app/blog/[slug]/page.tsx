@@ -64,31 +64,35 @@ export default function Blog({ params }) {
 
   return (
     <section className="stagger">
-      <h1 className="text-2xl/[1.2] font-semibold tracking-tighter sm:text-3xl/[1.2]">
+      <h1 className="max-w-6xl text-[clamp(2.5rem,7.5vw,7rem)]/[0.95] font-semibold tracking-[-0.05em]">
         {post.metadata.title}
       </h1>
-      <p className="mt-3 mb-10 text-sm text-neutral-500 dark:text-neutral-400">
-        <time dateTime={post.metadata.publishedAt}>
-          {formatDate(post.metadata.publishedAt)}
-        </time>
-      </p>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
-      <p className="mt-12 text-sm">
-        <Link
-          href="/blog"
-          className="group -m-1 inline-flex items-center gap-2 p-1 text-neutral-500 transition-colors duration-200 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-        >
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-200 group-hover:-translate-x-px group-focus-visible:-translate-x-px"
-          >
-            ←
-          </span>
-          All posts
-        </Link>
-      </p>
+      <div className="mt-12 grid gap-x-6 gap-y-10 border-t border-neutral-200 pt-6 sm:mt-20 sm:grid-cols-[12rem_1fr] sm:pt-8 lg:grid-cols-[16rem_1fr] dark:border-neutral-800">
+        <p className="font-mono text-xs text-neutral-500 uppercase sm:sticky sm:top-8 sm:self-start sm:text-sm dark:text-neutral-400">
+          <time dateTime={post.metadata.publishedAt}>
+            {formatDate(post.metadata.publishedAt)}
+          </time>
+        </p>
+        <div className="min-w-0 max-w-3xl">
+          <article className="prose">
+            <CustomMDX source={post.content} />
+          </article>
+          <p className="mt-16 border-t border-neutral-200 pt-8 text-base sm:text-lg dark:border-neutral-800">
+            <Link
+              href="/blog"
+              className="group -m-1 inline-flex items-center gap-3 p-1 font-medium tracking-tight text-neutral-600 transition-colors duration-200 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+            >
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 ease-out group-hover:-translate-x-1 group-focus-visible:-translate-x-1"
+              >
+                ←
+              </span>
+              All posts
+            </Link>
+          </p>
+        </div>
+      </div>
       {/* Last child, so it doesn't take a slot in the stagger */}
       <script
         type="application/ld+json"

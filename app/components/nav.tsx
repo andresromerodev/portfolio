@@ -40,8 +40,15 @@ export function Navbar() {
   }, [])
 
   return (
-    <aside className="enter mb-16 tracking-tight">
-      <nav className="-ml-2 flex flex-row gap-2" id="nav">
+    <aside className="enter mb-16 flex items-center justify-between border-b border-neutral-200 py-6 tracking-tight sm:mb-24 sm:py-8 dark:border-neutral-800">
+      <Link
+        href="/"
+        aria-label="Home"
+        className="hidden font-mono text-sm text-neutral-400 transition-colors duration-200 hover:text-neutral-900 sm:block dark:text-neutral-600 dark:hover:text-neutral-100"
+      >
+        {'</>'}
+      </Link>
+      <nav className="-mx-2 flex flex-row gap-1 text-[15px] sm:-mr-3 sm:gap-2 sm:text-base" id="nav">
         {Object.entries(navItems).map(([path, { name }]) => {
           let external = path.startsWith('http')
           let active = !external && isActive(pathname, path)
@@ -54,7 +61,10 @@ export function Navbar() {
               target={external ? '_blank' : undefined}
               rel={external ? 'noopener noreferrer' : undefined}
               className={cx(
-                'px-2 py-1',
+                'relative px-2 py-1 sm:px-3',
+                // Active page gets a small dot underneath instead of just darker text
+                active &&
+                  'after:absolute after:-bottom-1 after:left-1/2 after:size-1 after:-translate-x-1/2 after:rounded-full after:bg-current',
                 external && 'group inline-flex items-center gap-[3px]',
                 // Only inactive links ease, so the new active link snaps on navigation
                 active
